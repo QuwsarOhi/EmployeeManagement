@@ -63,6 +63,7 @@ flask db migrate
 flask db upgrade
 
 
+
 ## Startup Commands:
 
 export FLASK_CONFIG=development

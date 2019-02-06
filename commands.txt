@@ -57,6 +57,10 @@ CREATE DATABASE dreamteam_db; [table dreamteam_db created for user dt_admin]
 
 GRANT ALL PRIVILEGES ON dreamteam_db . * TO 'dt_admin'@'localhost'; [granting all access privilages to dt_admin]
 
+# database migration
+flask db init
+flask db migrate
+flask db upgrade
 
 
 ## Startup Commands:

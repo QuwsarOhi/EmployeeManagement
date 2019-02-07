@@ -22,14 +22,14 @@
               <a class="navbar-brand topnav" href="{{ url_for('home.homepage') }}">Project Dream Team</a>
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <!-- Modify nav bar menu -->
+
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
                   {% if current_user.is_admin %}
                     <li><a href="{{ url_for('home.admin_dashboard') }}">Dashboard</a></li>
                     <li><a href="{{ url_for('admin.list_departments') }}">Departments</a></li>
                     <li><a href="{{ url_for('admin.list_roles') }}">Roles</a></li>
-                    <li><a href="#">Employees</a></li>
+                    <li><a href="{{ url_for('admin.list_employees') }}">Employees</a></li>
                   {% else %}
                     <li><a href="{{ url_for('home.dashboard') }}">Dashboard</a></li>
                   {% endif %}

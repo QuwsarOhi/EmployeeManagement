@@ -71,3 +71,11 @@ export FLASK_APP=run.py
 flask run
 
 
+## Flask Shell Database:
+
+$ flask shell
+>>> from app.models import Employee
+>>> from app import db
+>>> admin = Employee(email="admin@admin.com",username="admin",password="admin2016",is_admin=True)
+>>> db.session.add(admin)
+>>> db.session.commit()

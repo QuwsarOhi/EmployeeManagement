@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block body %}
+
+<div class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">
+                    <h1> EM System </h1>
+                    <h3>Manage your employees in the most perfect way</h3>
+                    </ul>
+                    <br>
+                    <br>
+                    <a href="{{ url_for('auth.register') }}" id="out">New User? Let's Get Started!</a>
+                    <br>
+                    <br>
+                    <br>
+                    <a href="{{ url_for('auth.login') }}" id="in">Administrator Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

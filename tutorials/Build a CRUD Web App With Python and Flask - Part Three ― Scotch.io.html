@@ -1,0 +1,2132 @@
+<!DOCTYPE html>
+<!-- saved from url=(0081)https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three -->
+<html lang="en" class="fontawesome-i2svg-active fontawesome-i2svg-complete"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io</title>
+
+<style type="text/css">svg:not(:root).svg-inline--fa {
+  overflow: visible; }
+
+.svg-inline--fa {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -.125em; }
+  .svg-inline--fa.fa-lg {
+    vertical-align: -.225em; }
+  .svg-inline--fa.fa-w-1 {
+    width: 0.0625em; }
+  .svg-inline--fa.fa-w-2 {
+    width: 0.125em; }
+  .svg-inline--fa.fa-w-3 {
+    width: 0.1875em; }
+  .svg-inline--fa.fa-w-4 {
+    width: 0.25em; }
+  .svg-inline--fa.fa-w-5 {
+    width: 0.3125em; }
+  .svg-inline--fa.fa-w-6 {
+    width: 0.375em; }
+  .svg-inline--fa.fa-w-7 {
+    width: 0.4375em; }
+  .svg-inline--fa.fa-w-8 {
+    width: 0.5em; }
+  .svg-inline--fa.fa-w-9 {
+    width: 0.5625em; }
+  .svg-inline--fa.fa-w-10 {
+    width: 0.625em; }
+  .svg-inline--fa.fa-w-11 {
+    width: 0.6875em; }
+  .svg-inline--fa.fa-w-12 {
+    width: 0.75em; }
+  .svg-inline--fa.fa-w-13 {
+    width: 0.8125em; }
+  .svg-inline--fa.fa-w-14 {
+    width: 0.875em; }
+  .svg-inline--fa.fa-w-15 {
+    width: 0.9375em; }
+  .svg-inline--fa.fa-w-16 {
+    width: 1em; }
+  .svg-inline--fa.fa-w-17 {
+    width: 1.0625em; }
+  .svg-inline--fa.fa-w-18 {
+    width: 1.125em; }
+  .svg-inline--fa.fa-w-19 {
+    width: 1.1875em; }
+  .svg-inline--fa.fa-w-20 {
+    width: 1.25em; }
+  .svg-inline--fa.fa-pull-left {
+    margin-right: .3em;
+    width: auto; }
+  .svg-inline--fa.fa-pull-right {
+    margin-left: .3em;
+    width: auto; }
+  .svg-inline--fa.fa-border {
+    height: 1.5em; }
+  .svg-inline--fa.fa-li {
+    width: 2em; }
+  .svg-inline--fa.fa-fw {
+    width: 1.25em; }
+
+.fa-layers svg.svg-inline--fa {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0; }
+
+.fa-layers {
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  text-align: center;
+  vertical-align: -.125em;
+  width: 1em; }
+  .fa-layers svg.svg-inline--fa {
+    -webkit-transform-origin: center center;
+            transform-origin: center center; }
+
+.fa-layers-text, .fa-layers-counter {
+  display: inline-block;
+  position: absolute;
+  text-align: center; }
+
+.fa-layers-text {
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transform-origin: center center;
+          transform-origin: center center; }
+
+.fa-layers-counter {
+  background-color: #ff253a;
+  border-radius: 1em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #fff;
+  height: 1.5em;
+  line-height: 1;
+  max-width: 5em;
+  min-width: 1.5em;
+  overflow: hidden;
+  padding: .25em;
+  right: 0;
+  text-overflow: ellipsis;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top right;
+          transform-origin: top right; }
+
+.fa-layers-bottom-right {
+  bottom: 0;
+  right: 0;
+  top: auto;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: bottom right;
+          transform-origin: bottom right; }
+
+.fa-layers-bottom-left {
+  bottom: 0;
+  left: 0;
+  right: auto;
+  top: auto;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left; }
+
+.fa-layers-top-right {
+  right: 0;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top right;
+          transform-origin: top right; }
+
+.fa-layers-top-left {
+  left: 0;
+  right: auto;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top left;
+          transform-origin: top left; }
+
+.fa-lg {
+  font-size: 1.33333em;
+  line-height: 0.75em;
+  vertical-align: -.0667em; }
+
+.fa-xs {
+  font-size: .75em; }
+
+.fa-sm {
+  font-size: .875em; }
+
+.fa-1x {
+  font-size: 1em; }
+
+.fa-2x {
+  font-size: 2em; }
+
+.fa-3x {
+  font-size: 3em; }
+
+.fa-4x {
+  font-size: 4em; }
+
+.fa-5x {
+  font-size: 5em; }
+
+.fa-6x {
+  font-size: 6em; }
+
+.fa-7x {
+  font-size: 7em; }
+
+.fa-8x {
+  font-size: 8em; }
+
+.fa-9x {
+  font-size: 9em; }
+
+.fa-10x {
+  font-size: 10em; }
+
+.fa-fw {
+  text-align: center;
+  width: 1.25em; }
+
+.fa-ul {
+  list-style-type: none;
+  margin-left: 2.5em;
+  padding-left: 0; }
+  .fa-ul > li {
+    position: relative; }
+
+.fa-li {
+  left: -2em;
+  position: absolute;
+  text-align: center;
+  width: 2em;
+  line-height: inherit; }
+
+.fa-border {
+  border: solid 0.08em #eee;
+  border-radius: .1em;
+  padding: .2em .25em .15em; }
+
+.fa-pull-left {
+  float: left; }
+
+.fa-pull-right {
+  float: right; }
+
+.fa.fa-pull-left,
+.fas.fa-pull-left,
+.far.fa-pull-left,
+.fal.fa-pull-left,
+.fab.fa-pull-left {
+  margin-right: .3em; }
+
+.fa.fa-pull-right,
+.fas.fa-pull-right,
+.far.fa-pull-right,
+.fal.fa-pull-right,
+.fab.fa-pull-right {
+  margin-left: .3em; }
+
+.fa-spin {
+  -webkit-animation: fa-spin 2s infinite linear;
+          animation: fa-spin 2s infinite linear; }
+
+.fa-pulse {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+          animation: fa-spin 1s infinite steps(8); }
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+.fa-rotate-90 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg); }
+
+.fa-rotate-180 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg); }
+
+.fa-rotate-270 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg); }
+
+.fa-flip-horizontal {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+  -webkit-transform: scale(-1, 1);
+          transform: scale(-1, 1); }
+
+.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(1, -1);
+          transform: scale(1, -1); }
+
+.fa-flip-horizontal.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(-1, -1);
+          transform: scale(-1, -1); }
+
+:root .fa-rotate-90,
+:root .fa-rotate-180,
+:root .fa-rotate-270,
+:root .fa-flip-horizontal,
+:root .fa-flip-vertical {
+  -webkit-filter: none;
+          filter: none; }
+
+.fa-stack {
+  display: inline-block;
+  height: 2em;
+  position: relative;
+  width: 2.5em; }
+
+.fa-stack-1x,
+.fa-stack-2x {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0; }
+
+.svg-inline--fa.fa-stack-1x {
+  height: 1em;
+  width: 1.25em; }
+
+.svg-inline--fa.fa-stack-2x {
+  height: 2em;
+  width: 2.5em; }
+
+.fa-inverse {
+  color: #fff; }
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+.sr-only-focusable:active, .sr-only-focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto; }
+</style><link rel="apple-touch-icon" sizes="180x180" href="https://scotch.io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://scotch.io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://scotch.io/favicon-16x16.png">
+<link rel="manifest" href="https://scotch.io/manifest.json">
+<link rel="mask-icon" href="https://scotch.io/safari-pinned-tab.svg" color="#2e2e2e">
+<meta name="msapplication-TileColor" content="#2e2e2e">
+<meta name="theme-color" content="#333">
+<link rel="alternate" hreflang="en" type="application/rss+xml" href="https://scotch.io/feed" title="Scotch.io RSS Feed">
+
+<meta name="author" content="Mbithe Nzomo">
+<link rel="canonical" href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three">
+<link rel="amphtml" href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three/amp">
+
+<meta name="twitter:url" content="http://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three">
+<meta name="twitter:title" content="Build a CRUD Web App With Python and Flask - Part Three">
+<meta name="twitter:description" content="Create custom error pages, write tests, and deploy your app to PythonAnywhere">
+<meta name="twitter:image" content="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/qsbMCqBWSAewPczaDvsP_dream-team-3.jpg">
+<meta name="twitter:creator" content="mbithenzomo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@scotch_io">
+
+<meta property="og:title" content="Build a CRUD Web App With Python and Flask - Part Three">
+<meta property="og:image" content="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/qsbMCqBWSAewPczaDvsP_dream-team-3.jpg">
+<meta property="og:description" content="Create custom error pages, write tests, and deploy your app to PythonAnywhere">
+<meta property="article:author" content="Scotch">
+<meta property="fb:admins" content="579622216,709634581">
+<meta property="fb:app_id" content="1389892087910588">
+<meta property="og:url" content="http://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three">
+<meta property="og:type" content="article">
+<meta property="article:publisher" content="https://www.facebook.com/scotchdevelopment">
+<meta property="og:site_name" content="Scotch">
+
+<link rel="publisher" href="https://plus.google.com/b/113854128330570384219">
+<link rel="author" href="https://plus.google.com/b/113854128330570384219">
+<meta name="description" content="Create custom error pages, write tests, and deploy your app to PythonAnywhere">
+<meta name="google-site-verification" content="NoKkRtzSguNO3Xd1cuhpVkUoh7n8mz-aofV9Ch4aS8w">
+<meta name="article_category" data-category="python">
+<meta name="article_tags" content="python">
+<meta name="article_tags" content="crud">
+<meta name="article_tags" content="flask">
+<link rel="dns-prefetch" href="https://scotch.io/">
+<link rel="dns-prefetch" href="https://4krgxptf7k-dsn.algolia.net/">
+<link rel="dns-prefetch" href="https://scotch-res.cloudinary.com/">
+<link rel="dns-prefetch" href="https://www.gravatar.com/">
+<link rel="dns-prefetch" href="https://www.google-analytics.com/">
+<link rel="dns-prefetch" href="https://sessions.bugsnag.com/">
+<link rel="preconnect" href="https://scotch.io/">
+<link rel="preconnect" href="https://4krgxptf7k-dsn.algolia.net/">
+<link rel="preconnect" href="https://scotch-res.cloudinary.com/">
+<link rel="preconnect" href="https://www.gravatar.com/">
+<link rel="preconnect" href="https://www.google-analytics.com/">
+<link rel="preconnect" href="https://sessions.bugsnag.com/">
+<link rel="dns-prefetch" href="https://open-api.spot.im/">
+<link rel="preconnect" href="https://open-api.spot.im/">
+<link rel="stylesheet" href="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/fonts.css">
+<link rel="stylesheet" href="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/main.css">
+<style>
+    #twitch-banner {
+        transition: 0.3s ease background;
+    }
+    #twitch-banner:hover {
+        background: hsl(254, 36%, 45%) !important;
+    }
+</style>
+<script async="" src="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/analytics.js"></script><script>
+        window.scotchy = window.scotchy || {};
+        window.scotchy.env = 'production';
+    </script><style id="dark-reader-style" type="text/css">@media screen {
+
+/* Leading rule */
+html {
+  -webkit-filter: invert(100%) hue-rotate(180deg) brightness(50%) !important;
+  filter: invert(100%) hue-rotate(180deg) brightness(50%) !important;
+}
+
+/* Reverse rule */
+img,
+video,
+:not(object):not(body)>embed,
+object,
+svg image,
+[style*="background:url"],
+[style*="background-image:url"],
+[style*="background: url"],
+[style*="background-image: url"],
+[background],
+twitterwidget,
+.language-js,
+.language-javascript {
+  -webkit-filter: invert(100%) hue-rotate(180deg) !important;
+  filter: invert(100%) hue-rotate(180deg) !important;
+}
+[style*="background:url"] *,
+[style*="background-image:url"] *,
+[style*="background: url"] *,
+[style*="background-image: url"] *,
+input,
+[background] *,
+img[src^="https://s0.wp.com/latex.php"],
+twitterwidget .NaturalImage-image {
+  -webkit-filter: none !important;
+  filter: none !important;
+}
+.compatibility-with-darkreader-below-4-3-3 {
+  background: white !important;
+}
+
+/* Text contrast */
+html {
+  text-shadow: 0 0 0 !important;
+}
+
+/* Full screen */
+:-webkit-full-screen, :-webkit-full-screen * {
+  -webkit-filter: none !important;
+  filter: none !important;
+}
+:-moz-full-screen, :-moz-full-screen * {
+  -webkit-filter: none !important;
+  filter: none !important;
+}
+:fullscreen, :fullscreen * {
+  -webkit-filter: none !important;
+  filter: none !important;
+}
+
+/* Page background */
+html {
+  background: rgb(0,0,0) !important;
+}
+
+/* Custom rules */
+.compatibility-with-darkreader-below-4-3-3 {
+    background: white !important;
+}
+
+}</style>
+<script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.ready.then(function(registration) {
+                registration.unregister();
+            });
+        }
+    </script>
+<style type="text/css">@-webkit-keyframes spl_seoInserted{0%{outline-color:#fff}to{outline-color:#000}}@keyframes spl_seoInserted{0%{outline-color:#fff}to{outline-color:#000}}[data-spot-im-seo]{-webkit-animation-duration:10ms;animation-duration:10ms;-webkit-animation-name:spl_seoInserted;animation-name:spl_seoInserted}</style><style type="text/css">null</style><script type="text/javascript" charset="utf-8" async="" src="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/9.js"></script><script type="text/javascript" charset="utf-8" async="" src="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/14.js"></script><style data-styled="" data-styled-version="4.1.3"></style><script type="text/javascript" charset="utf-8" async="" src="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/15.js"></script><style>
+    @keyframes community-promo {
+    from {
+        outline-color: #fff;
+    }
+    to {
+        outline-color: #000;
+    }
+  }
+    [data-spotim-module="community-promo"]:not([data-ready="true"]) {
+      animation-duration: 10ms;
+    animation-name: community-promo;
+ }
+  </style><style>
+    @keyframes messages-count {
+    from {
+        outline-color: #fff;
+    }
+    to {
+        outline-color: #000;
+    }
+  }
+    [data-spotim-module="messages-count"]:not([data-ready="true"]) {
+      animation-duration: 10ms;
+    animation-name: messages-count;
+ }
+  </style><script type="text/javascript" charset="utf-8" async="" src="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/6.js"></script></head>
+<body class="is-single is-post">
+<nav id="scotchy-nav" class="navbar is-dark">
+<div class="navbar-brand">
+<a class="navbar-item" href="https://scotch.io/">
+<div class="scotch-container">
+<div class="scotch-logo">
+<img class="scotch-logo__image" src="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/blank-glass.png" alt="Scotch Logo" width="30" height="49">
+<svg class="scotch-logo__liquid" viewBox="0 0 30 48" style="max-width: 80px">
+<defs>
+<clippath id="clip-path--glass">
+<path class="liquid__path-container" d="M 8.6 1.5 c 0 13.33 -4.17 20 -3.75 23.33 a 9.17 8.33 0 0 0 20.83 0 c 0.42 -3.33 -3.75 -10 -3.75 -23.33 Z"></path>
+</clippath>
+<clippath id="clip-path--liquid">
+<path class="liquid__path liquid__path--top-clip" d="M -80 22 C -75.08 16 -69.08 16 -64.17 22 S -53.25 28 -48.33 22 S -37.42 16 -32.5 22 S -21.58 28 -16.67 22 S -5.75 16 -0.83 22 S 10.08 28 15 22 S 25.92 16 30.83 22 S 41.75 28 46.67 22 S 57.58 16 62.5 22 S 73.42 28 78.33 22 S 89.25 16 94.17 22 S 105.08 28 110 22 l 0 30 l -190 0"></path>
+</clippath>
+</defs>
+<g clip-path="url(#clip-path--glass)">
+<circle class="liquid__drop liquid__drop--top liquid__drop--1" cx="18.3" cy="3.3" r="1.5"></circle>
+<circle class="liquid__drop liquid__drop--bottom liquid__drop--2" cx="12" cy="5" r="1.5"></circle>
+<path class="liquid__path liquid__path--top" d="M -80 22 C -75.08 16 -69.08 16 -64.17 22 S -53.25 28 -48.33 22 S -37.42 16 -32.5 22 S -21.58 28 -16.67 22 S -5.75 16 -0.83 22 S 10.08 28 15 22 S 25.92 16 30.83 22 S 41.75 28 46.67 22 S 57.58 16 62.5 22 S 73.42 28 78.33 22 S 89.25 16 94.17 22 S 105.08 28 110 22 l 0 30 l -190 0"></path>
+<path class="liquid__path liquid__path--bottom" d="M -70 24.5 C -65.92 18.5 -59.92 18.5 -55.83 24.5 S -45.75 30.5 -41.67 24.5 S -31.58 18.5 -27.5 24.5 S -17.42 30.5 -13.33 24.5 S -3.25 18.5 0.83 24.5 S 10.92 30.5 15 24.5 S 25.08 18.5 29.17 24.5 S 39.25 30.5 43.33 24.5 S 53.42 18.5 57.5 24.5 S 67.58 30.5 71.67 24.5 S 81.75 18.5 85.83 24.5 S 95.92 30.5 100 24.5 l 0 30 l -170 0"></path>
+<g class="liquid__path--clip-container" clip-path="url(#clip-path--liquid)">
+<path class="liquid__path liquid__path--bottom-clip" d="M -70 24.5 C -65.92 18.5 -59.92 18.5 -55.83 24.5 S -45.75 30.5 -41.67 24.5 S -31.58 18.5 -27.5 24.5 S -17.42 30.5 -13.33 24.5 S -3.25 18.5 0.83 24.5 S 10.92 30.5 15 24.5 S 25.08 18.5 29.17 24.5 S 39.25 30.5 43.33 24.5 S 53.42 18.5 57.5 24.5 S 67.58 30.5 71.67 24.5 S 81.75 18.5 85.83 24.5 S 95.92 30.5 100 24.5 l 0 30 l -170 0"></path>
+</g>
+</g>
+</svg>
+</div>
+</div>
+<span class="logo-text">Scotch</span>
+</a>
+<a role="button" class="navbar-burger" data-target="nav-menu" aria-label="menu" aria-expanded="false">
+<span aria-hidden="true"></span>
+<span aria-hidden="true"></span>
+<span aria-hidden="true"></span>
+</a>
+</div>
+<div id="nav-menu" class="navbar-menu">
+<div class="navbar-start">
+<a class="navbar-item " href="https://scotch.io/courses" title="Coding Courses">
+<span class="left">Coding</span>
+<span class="right">Courses</span>
+</a>
+<div class="navbar-item is-scotch-active has-dropdown is-hoverable">
+<a class="navbar-link" href="https://scotch.io/posts" title="Written Posts">
+<span class="left">Written</span>
+<span class="right">Posts</span>
+</a>
+<div class="navbar-dropdown">
+<a class="navbar-item" href="https://scotch.io/tutorials" title="Tutorials">Tutorials</a>
+<a class="navbar-item" href="https://scotch.io/bar-talk" title="Bar Talk (News)">Bar Talk (News)</a>
+<a class="navbar-item" href="https://scotch.io/community" title="Community">Community</a>
+</div>
+</div>
+<a class="navbar-item" href="https://scotch.io/code-challenges" title="Coding Challenges">
+<span class="left">Code</span> <span class="right">Challenges</span>
+</a>
+<a class="navbar-item " href="https://scotch.io/live-coding" title="Vue Book">
+<span class="left">Live</span> <span class="right">Coding!</span>
+</a>
+<a class="navbar-item " href="https://scotch.io/books/vue" title="Vue Book">
+<span class="left">Practical</span> <span class="right has-text-warning">Vue Book</span>
+</a>
+<div class="navbar-item has-dropdown is-hoverable is-hidden-tablet-only is-hidden-mobile navbar-extra">
+<a class="navbar-link">...</a>
+<div class="navbar-dropdown">
+<a class="navbar-item" href="https://scotch.io/about">About</a>
+<a class="navbar-item" href="https://scotch.io/newsletter">Newsletter</a>
+<a class="navbar-item" href="https://shop.scotch.io/">Shop</a>
+<a class="navbar-item" href="https://scotch.io/cool-stuff">Stuff We Use</a>
+<div class="navbar-item">
+<a class="m-r-sm" href="https://twitter.com/scotch_io" title="Follow Scotch on Twitter" aria-label="Follow Scotch on Twitter">
+<svg class="svg-inline--fa fa-twitter fa-w-16 fa-fw has-text-info" aria-hidden="true" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg><!-- <i class="fab fa-fw fa-twitter has-text-info"></i> -->
+</a>
+<a href="https://facebook.com/scotchdevelopment" title="Follow Scotch on Facebook" aria-label="Follow Scotch on Facebook" style="margin-right: 15px;">
+<svg class="svg-inline--fa fa-facebook fa-w-14 fa-fw has-text-link" aria-hidden="true" data-prefix="fab" data-icon="facebook" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 56.7v398.5c0 13.7-11.1 24.7-24.7 24.7H309.1V306.5h58.2l8.7-67.6h-67v-43.2c0-19.6 5.4-32.9 33.5-32.9h35.8v-60.5c-6.2-.8-27.4-2.7-52.2-2.7-51.6 0-87 31.5-87 89.4v49.9h-58.4v67.6h58.4V480H24.7C11.1 480 0 468.9 0 455.3V56.7C0 43.1 11.1 32 24.7 32h398.5c13.7 0 24.8 11.1 24.8 24.7z"></path></svg><!-- <i class="fab fa-fw fa-facebook has-text-link"></i> -->
+</a>
+<a href="https://facebook.com/scotchdevelopment" title="Follow Scotch on GitHub" aria-label="Follow Scotch on GitHub">
+<svg class="svg-inline--fa fa-github-alt fa-w-15 fa-fw has-text-white" aria-hidden="true" data-prefix="fab" data-icon="github-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512" data-fa-i2svg=""><path fill="currentColor" d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"></path></svg><!-- <i class="fab fa-fw fa-github-alt has-text-white"></i> -->
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="navbar-end">
+<div id="react-search-bar"><form class="search-form" action="https://scotch.io/search" method="GET"><input type="search" name="q" placeholder="Search scotchy scotch..." aria-label="Search Scotch"><button type="submit" class="search-icon" aria-label="Search"><svg viewBox="654 -372 1664 1664" width="16" height="16"><path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z"></path></svg></button></form></div>
+<div id="react-user-nav"><nav class="user-nav"><ul><li class="user-nav__action"><a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three#" class="button is-dark">Login</a></li><li class="user-nav__action"><a href="https://scotch.io/register" class="button is-danger is-outlined">Sign Up<svg aria-hidden="true" data-prefix="fal" data-icon="hand-spock" class="svg-inline--fa fa-hand-spock fa-w-16 m-l-sm" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M443.093 87.615c-.664-25.947-18.382-50.01-45.605-56.816-32.269-8.067-64.966 11.445-73.064 43.839L297.674 208 266.689 46.772c-7.438-32.377-39.771-52.688-72.214-45.229-29.713 6.826-49.247 34.672-46.508 64.236-41.241-5.55-76.092 31.84-66.719 73.078L116 291.76v13.722l-14.484-13.606c-24.631-23.18-62.766-21.223-85.169 2.582-22.768 24.191-21.611 62.397 2.581 85.166l133.747 125.853A24 24 0 0 0 169.124 512h246.087a24 24 0 0 0 23.01-17.178l32.951-111.146a110.935 110.935 0 0 0 4.578-31.55V313.97c0-4.908.576-9.818 1.713-14.592l32.853-138.174c9.943-41.755-25.657-79.651-67.223-73.589zm36.131 66.179l-32.89 138.172a95.075 95.075 0 0 0-2.584 22.005v38.154a78.974 78.974 0 0 1-3.259 22.455L409.238 480H172.297L40.889 356.322c-11.344-10.677-11.886-28.591-1.21-39.934l.001-.001c10.736-11.409 28.607-11.867 39.932-1.21l54.905 51.676c5.097 4.795 13.483 1.173 13.483-5.825v-71.961c0-.597-.066-1.191-.199-1.772l-35.349-155.534c-8.278-36.423 46.805-48.997 55.096-12.521l31.484 138.532a7.999 7.999 0 0 0 7.801 6.228h8.911c5.136 0 8.948-4.783 7.797-9.791L180.436 66.583c-8.354-36.36 46.662-49.213 55.065-12.649l46.834 203.857a8 8 0 0 0 7.797 6.209h13.689a7.999 7.999 0 0 0 7.761-6.06l43.885-175.542c9.062-36.254 63.888-22.598 54.814 13.703l-39.49 157.958c-1.264 5.052 2.565 9.94 7.761 9.94h10.041a7.999 7.999 0 0 0 7.782-6.147l27.884-117.145c8.655-36.347 63.634-23.323 54.965 13.087z"></path></svg></a></li></ul></nav></div>
+</div>
+</div>
+</nav>
+<nav id="tag-nav" class="navbar is-dark is-hidden-touch">
+<div class="navbar-menu">
+<div class="navbar-start">
+<a class="navbar-item" href="https://scotch.io/tag/react">
+<span>#</span>react
+</a>
+<a class="navbar-item" href="https://scotch.io/tag/vue">
+<span>#</span>vue
+</a>
+<a class="navbar-item" href="https://scotch.io/tag/angular">
+<span>#</span>angular
+</a>
+<a class="navbar-item" href="https://scotch.io/tag/javascript">
+<span>#</span>javascript
+</a>
+<a class="navbar-item" href="https://scotch.io/tag/node.js">
+<span>#</span>node.js
+</a>
+<a class="navbar-item" href="https://scotch.io/tag/laravel">
+<span>#</span>laravel
+</a>
+<a class="navbar-item" href="https://scotch.io/tag/css">
+<span>#</span>css
+</a>
+<a class="navbar-item" href="https://scotch.io/tag/php">
+<span>#</span>php
+</a>
+<a class="navbar-item" href="https://scotch.io/tag/editors">
+<span>#</span>editors
+</a>
+<a class="navbar-item" href="https://scotch.io/tag/python">
+<span>#</span>python
+</a>
+<a class="navbar-item" href="https://scotch.io/tag/api">
+<span>#</span>api
+</a>
+<a class="navbar-item" href="https://scotch.io/tag/graphql">
+<span>#</span>graphql
+</a>
+<a class="navbar-item" href="https://scotch.io/tag/authentication">
+<span>#</span>authentication
+</a>
+</div>
+</div>
+</nav>
+<div id="react-login-modal"></div>
+<main id="scotchy-main">
+<div id="react-article-tools" data-type="post" data-edit-url="https://my.scotch.io/posts/2486" data-id="2486" data-author-id="8943" data-status="published" data-is-preview="" data-is-community=""><div class="article-tools" style="position: fixed; left: 30px; bottom: 30px; z-index: 9999;"></div></div>
+<div id="react-table-of-contents"><div class="is-fixed" style="display: none;"><ul class=""><li class=""><a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three#toc-custom-error-pages"><span class="line"></span><span class="text">Custom Error Pages</span></a></li><li class=""><a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three#toc-tests"><span class="line"></span><span class="text">Tests</span></a></li><li class=""><a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three#toc-deploy-"><span class="line"></span><span class="text">Deploy!</span></a></li><li class=""><a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three#toc-conclusion"><span class="line"></span><span class="text">Conclusion</span></a></li></ul></div></div>
+<div id="article-share-buttons">
+<a href="https://github.com/andela-mnzomo/project-dream-team-three" target="_blank" rel="noopener noreferrer" class="action-button is-link is-code" title="View Code" data-type="Code" data-title="Build a CRUD Web App With Python and Flask - Part Three" data-tooltip="Show me the code!">
+<svg class="svg-inline--fa fa-code fa-w-18 fa-xs" data-fa-transform="shrink-2" aria-hidden="true" data-prefix="fal" data-icon="code" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="" style="transform-origin: 0.5625em 0.5em;"><g transform="translate(288 256)"><g transform="translate(0, 0)  scale(0.875, 0.875)  rotate(0 0 0)"><path fill="currentColor" d="M228.5 511.8l-25-7.1c-3.2-.9-5-4.2-4.1-7.4L340.1 4.4c.9-3.2 4.2-5 7.4-4.1l25 7.1c3.2.9 5 4.2 4.1 7.4L235.9 507.6c-.9 3.2-4.3 5.1-7.4 4.2zm-75.6-125.3l18.5-20.9c1.9-2.1 1.6-5.3-.5-7.1L49.9 256l121-102.5c2.1-1.8 2.4-5 .5-7.1l-18.5-20.9c-1.8-2.1-5-2.3-7.1-.4L1.7 252.3c-2.3 2-2.3 5.5 0 7.5L145.8 387c2.1 1.8 5.3 1.6 7.1-.5zm277.3.4l144.1-127.2c2.3-2 2.3-5.5 0-7.5L430.2 125.1c-2.1-1.8-5.2-1.6-7.1.4l-18.5 20.9c-1.9 2.1-1.6 5.3.5 7.1l121 102.5-121 102.5c-2.1 1.8-2.4 5-.5 7.1l18.5 20.9c1.8 2.1 5 2.3 7.1.4z" transform="translate(-288 -256)"></path></g></g></svg><!-- <i class="fal fa-code fa-xs" data-fa-transform="shrink-2"></i> -->
+</a>
+<a href="http://projectdreamteam.pythonanywhere.com/" target="_blank" rel="noopener noreferrer" class="action-button is-link is-demo" title="View Demo" data-type="Demo" data-title="Build a CRUD Web App With Python and Flask - Part Three" data-tooltip="Demo or it didn&#39;t happen">
+<svg class="svg-inline--fa fa-desktop fa-w-18 fa-xs" data-fa-transform="shrink-3.5 down-0.5" aria-hidden="true" data-prefix="fal" data-icon="desktop" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="" style="transform-origin: 0.5625em 0.53125em;"><g transform="translate(288 256)"><g transform="translate(0, 16)  scale(0.78125, 0.78125)  rotate(0 0 0)"><path fill="currentColor" d="M528 0H48C21.5 0 0 21.5 0 48v288c0 26.5 21.5 48 48 48h192l-24 96h-72c-8.8 0-16 7.2-16 16s7.2 16 16 16h288c8.8 0 16-7.2 16-16s-7.2-16-16-16h-72l-24-96h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM249 480l16-64h46l16 64h-78zm295-144c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16V48c0-8.8 7.2-16 16-16h480c8.8 0 16 7.2 16 16v288z" transform="translate(-288 -256)"></path></g></g></svg><!-- <i class="fal fa-desktop fa-xs" data-fa-transform="shrink-3.5 down-0.5"></i> -->
+</a>
+<a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three?utm_source=scotch&amp;utm_campaign=share&amp;utm_medium=twitter" class="action-button share-button is-social is-twitter m-t" title="Share to Twitter" data-title="Build a CRUD Web App With Python and Flask - Part Three" data-type="Twitter" data-via="scotch_io" data-tooltip="Chirp chirp">
+<div role="button" aria-label="Twitter"><svg class="svg-inline--fa fa-twitter fa-w-16 fa-xs" data-fa-transform="right-0.5 down-0.3" aria-hidden="true" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="" style="transform-origin: 0.53125em 0.51875em;"><g transform="translate(256 256)"><g transform="translate(16, 9.6)  scale(1, 1)  rotate(0 0 0)"><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z" transform="translate(-256 -256)"></path></g></g></svg><!-- <i class="fab fa-twitter fa-xs" data-fa-transform="right-0.5 down-0.3"></i> --></div>
+</a>
+<a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three?utm_source=scotch&amp;utm_campaign=share&amp;utm_medium=facebook" class="action-button share-button is-social is-facebook m-t" title="Share to Facebook" data-title="Build a CRUD Web App With Python and Flask - Part Three" data-type="Facebook" data-tooltip="Zuck it">
+<div role="button" aria-label="Facebook"><svg class="svg-inline--fa fa-facebook fa-w-14 fa-xs" data-fa-transform="up-0.2" aria-hidden="true" data-prefix="fab" data-icon="facebook" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="" style="transform-origin: 0.4375em 0.4875em;"><g transform="translate(224 256)"><g transform="translate(0, -6.4)  scale(1, 1)  rotate(0 0 0)"><path fill="currentColor" d="M448 56.7v398.5c0 13.7-11.1 24.7-24.7 24.7H309.1V306.5h58.2l8.7-67.6h-67v-43.2c0-19.6 5.4-32.9 33.5-32.9h35.8v-60.5c-6.2-.8-27.4-2.7-52.2-2.7-51.6 0-87 31.5-87 89.4v49.9h-58.4v67.6h58.4V480H24.7C11.1 480 0 468.9 0 455.3V56.7C0 43.1 11.1 32 24.7 32h398.5c13.7 0 24.8 11.1 24.8 24.7z" transform="translate(-224 -256)"></path></g></g></svg><!-- <i class="fab fa-facebook fa-xs" data-fa-transform="up-0.2"></i> --></div>
+</a>
+<a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three?utm_source=scotch&amp;utm_campaign=share&amp;utm_medium=reddit" class="action-button share-button is-social is-reddit m-t" title="Share to Reddit" data-title="Build a CRUD Web App With Python and Flask - Part Three" data-type="Reddit" data-tooltip="Karma me">
+<div role="button" aria-label="Reddit"><svg class="svg-inline--fa fa-reddit-alien fa-w-16 fa-xs" data-fa-transform="left-0.1 up-0.4" aria-hidden="true" data-prefix="fab" data-icon="reddit-alien" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="" style="transform-origin: 0.49375em 0.475em;"><g transform="translate(256 256)"><g transform="translate(-3.2, -12.8)  scale(1, 1)  rotate(0 0 0)"><path fill="currentColor" d="M440.3 203.5c-15 0-28.2 6.2-37.9 15.9-35.7-24.7-83.8-40.6-137.1-42.3L293 52.3l88.2 19.8c0 21.6 17.6 39.2 39.2 39.2 22 0 39.7-18.1 39.7-39.7s-17.6-39.7-39.7-39.7c-15.4 0-28.7 9.3-35.3 22l-97.4-21.6c-4.9-1.3-9.7 2.2-11 7.1L246.3 177c-52.9 2.2-100.5 18.1-136.3 42.8-9.7-10.1-23.4-16.3-38.4-16.3-55.6 0-73.8 74.6-22.9 100.1-1.8 7.9-2.6 16.3-2.6 24.7 0 83.8 94.4 151.7 210.3 151.7 116.4 0 210.8-67.9 210.8-151.7 0-8.4-.9-17.2-3.1-25.1 49.9-25.6 31.5-99.7-23.8-99.7zM129.4 308.9c0-22 17.6-39.7 39.7-39.7 21.6 0 39.2 17.6 39.2 39.7 0 21.6-17.6 39.2-39.2 39.2-22 .1-39.7-17.6-39.7-39.2zm214.3 93.5c-36.4 36.4-139.1 36.4-175.5 0-4-3.5-4-9.7 0-13.7 3.5-3.5 9.7-3.5 13.2 0 27.8 28.5 120 29 149 0 3.5-3.5 9.7-3.5 13.2 0 4.1 4 4.1 10.2.1 13.7zm-.8-54.2c-21.6 0-39.2-17.6-39.2-39.2 0-22 17.6-39.7 39.2-39.7 22 0 39.7 17.6 39.7 39.7-.1 21.5-17.7 39.2-39.7 39.2z" transform="translate(-256 -256)"></path></g></g></svg><!-- <i class="fab fa-reddit-alien fa-xs" data-fa-transform="left-0.1 up-0.4"></i> --></div>
+</a>
+</div>
+<article class="article is-post  is-">
+<div class="article-background is-left"></div>
+<div class="article-background is-right"></div>
+<header class="article-header">
+<a href="https://bit.ly/2CDPfg2" id="twitch-banner" class="has-text-centered p-a-sm" style="
+    display: none;
+    background: #493a7a;
+    color: hsl(254, 36%, 90%);
+">
+<svg class="svg-inline--fa fa-twitch fa-w-14 m-r-sm" aria-hidden="true" data-prefix="fab" data-icon="twitch" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M40.1 32L10 108.9v314.3h107V480h60.2l56.8-56.8h87l117-117V32H40.1zm357.8 254.1L331 353H224l-56.8 56.8V353H76.9V72.1h321v214zM331 149v116.9h-40.1V149H331zm-107 0v116.9h-40.1V149H224z"></path></svg><!-- <i class="fab fa-twitch m-r-sm"></i> --> We're live-coding on Twitch! Join us!
+</a>
+<section class="
+    hero
+    article-hero
+     is-dark     is-python
+    has-feature
+">
+<div class="hero-body p-t-md">
+<div class="container">
+<div class="is-hidden-with-subscription has-text-centered">
+<div id="bsa-zone_1537909991-0_123456"></div>
+</div>
+<div class="article-header is-post p-y">
+<div class="columns">
+<div class="column is-narrow is-left" style="flex-basis: 188px;"></div>
+<div class="column">
+<div class="article-title m-b-xs m-t-md">
+<h1 class="title is-3 m-a-0">Build a CRUD Web App With Python and Flask - Part Three</h1>
+</div>
+<div class="article-byline m-b">
+<div class="scotch-line">
+<div class="author">
+<a href="https://scotch.io/@mbithenzomo" class="img" title="Mbithe Nzomo&#39;s Avatar" style="background-image: url(https://scotch-res.cloudinary.com/image/upload/w_40,h_40,q_auto:good,f_auto,c_fill,g_face/media/8943/DIpEAHkMScuUwZL9s5Q1_mbithe.jpg);">
+</a>
+<a href="https://scotch.io/@mbithenzomo" title="Mbithe Nzomo">
+Mbithe Nzomo
+</a>
+<a class="m-l-xs" href="https://twitter.com/mbithenzomo" title="Follow @mbithenzomo on Twitter">
+(@mbithenzomo)
+</a>
+</div>
+<time>January 11, 2017</time>
+<a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three#comments" class="comment-number" title="Comments on this Article" data-id="2486" data-has-words="true">52 Comments</a>
+<span class="hotness">
+<span class="pageviews" data-type="post" data-id="2486">27,443</span> Views
+</span>
+<div id="react-bookmark" data-article-type="post" data-article-id="2486" data-article-title="Build a CRUD Web App With Python and Flask - Part Three"><div class="sc-bwzfXH jYzaSr"><a class="bookmark-button m-r-sm"><svg aria-hidden="true" data-prefix="fal" data-icon="bookmark" class="svg-inline--fa fa-bookmark fa-w-12 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M336 0H48C21.49 0 0 21.49 0 48v464l192-112 192 112V48c0-26.51-21.49-48-48-48zm16 456.287l-160-93.333-160 93.333V48c0-8.822 7.178-16 16-16h288c8.822 0 16 7.178 16 16v408.287z"></path></svg> Bookmark</a></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="columns is-desktop">
+ <div class="column is-narrow is-left is-flex" style="flex-basis: 188px; flex-direction: column; justify-content: space-between;">
+<div style="width: 100%">
+<div class="author author-side p-r">
+<a href="https://scotch.io/@mbithenzomo" class="img is-block m-b-xs" title="Mbithe Nzomo&#39;s Avatar" style="background-image: url(https://scotch-res.cloudinary.com/image/upload/w_80,h_80,q_auto:good,f_auto,c_fill,g_face/media/8943/DIpEAHkMScuUwZL9s5Q1_mbithe.jpg);">
+</a>
+<a href="https://scotch.io/@mbithenzomo" title="Mbithe Nzomo" class="is-block m-b-xs">
+Mbithe Nzomo
+</a>
+<a id="author-follow-twitter" data-twitter-username="mbithenzomo" href="https://twitter.com/mbithenzomo" title="Follow @mbithenzomo on Twitter" class="button is-outlined is-light is-small is-rounded">
+Follow on Twitter
+</a>
+</div>
+</div>
+<div style="width: 100%">
+<div class="tag-box is-python">
+<a href="https://scotch.io/tag/python">
+<span class="tag-label">
+<span class="hash">#</span>python
+</span>
+<span class="tag-count">46</span>
+</a>
+</div>
+<div class="tag-box is-crud">
+<a href="https://scotch.io/tag/crud">
+<span class="tag-label">
+<span class="hash">#</span>crud
+</span>
+<span class="tag-count">11</span>
+</a>
+</div>
+<div class="tag-box is-flask">
+<a href="https://scotch.io/tag/flask">
+<span class="tag-label">
+<span class="hash">#</span>flask
+</span>
+<span class="tag-count">18</span>
+</a>
+</div>
+</div>
+</div>
+<div class="column">
+<div class="article-feature">
+<div class="article-image is-2by1">
+<img src="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/qsbMCqBWSAewPczaDvsP_dream-team-3.webp" class="media" alt="Build a CRUD Web App With Python and Flask - Part Three">
+</div>
+</div>
+</div>
+<div class="column is-narrow is-right is-flex" style="flex-basis: 300px; flex-direction: column; justify-content: space-between;">
+<div style="width: 100%">
+<div id="react-likes" class="p-t" data-article-type="post" data-article-id="2486" data-article-title="Build a CRUD Web App With Python and Flask - Part Three"><div class="sc-bdVaJa ZQsyE"><a class="like-icon m-r-sm"><svg aria-hidden="true" data-prefix="fal" data-icon="heart" class="svg-inline--fa fa-heart fa-w-16 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M462.3 62.7c-54.5-46.4-136-38.7-186.6 13.5L256 96.6l-19.7-20.3C195.5 34.1 113.2 8.7 49.7 62.7c-62.8 53.6-66.1 149.8-9.9 207.8l193.5 199.8c6.2 6.4 14.4 9.7 22.6 9.7 8.2 0 16.4-3.2 22.6-9.7L472 270.5c56.4-58 53.1-154.2-9.7-207.8zm-13.1 185.6L256.4 448.1 62.8 248.3c-38.4-39.6-46.4-115.1 7.7-161.2 54.8-46.8 119.2-12.9 142.8 11.5l42.7 44.1 42.7-44.1c23.2-24 88.2-58 142.8-11.5 54 46 46.1 121.5 7.7 161.2z"></path></svg></a><a href="https://scotch.io/@muraray" class="user-like">@muraray</a> and 8 others like this post!</div></div>
+</div>
+<div class="topper-next is-dark" style="width: 100%">
+<a href="https://bit.ly/2QRzirN" class="box has-text-black has-text-centered">
+<h4 class="title is-4 m-b-xs has-text-warning">Scotch.io's Vue Book</h4>
+<p class="m-b-sm">Build real-world Vue apps</p>
+<button class="button is-small is-dark is-outlined is-rounded">Get 50% off</button>
+</a>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column is-narrow is-left" style="flex-basis: 200px;"></div>
+<div class="column">
+<div class="article-actions is-post p-t">
+<a href="https://github.com/andela-mnzomo/project-dream-team-three" target="_blank" rel="noopener noreferrer" class="button is-scotch is-large is-outlined is-info is-rounded">
+Code
+</a>
+<a href="http://projectdreamteam.pythonanywhere.com/" target="_blank" rel="noopener noreferrer" class="button is-scotch is-large is-outlined is-info is-rounded">
+Demo
+</a>
+</div>
+</div>
+<div class="column is-narrow is-left" style="flex-basis: 300px;"></div>
+</div>
+</div>
+</div>
+</div>
+<svg class="diagonal" width="100%" height="300px" viewBox="0 0 100 100" preserveAspectRatio="none">
+<polygon fill="#ffffff" points="0,0 0,100 100,100"></polygon>
+</svg>
+</section>
+</header>
+<div class="section content">
+<div class="container m-b-0 is-fluid">
+<div class="columns is-gapless">
+<div class="column is-narrow is-left">
+<div class="article-inner">
+</div>
+</div>
+<div class="column is-middle">
+<div class="article-inner">
+<div class="article-content">
+<p>This is the last part of a three-part tutorial to build an employee management web app, named Project Dream Team. In <a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-two">Part Two</a> of the tutorial, we built out the CRUD functionality of the app. </p>
+<p>We created forms, views, and templates to list, add, edit and delete departments and roles. By the end of Part Two, we could assign (and re-assign) departments and roles to employees.</p>
+<p>In Part Three, we will cover:</p><div class="table-of-contents"><h3>Table of Contents</h3><ul><li><a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three#toc-custom-error-pages">
+Custom Error Pages
+</a></li><li><a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three#toc-tests">
+Tests
+</a></li><li><a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three#toc-deploy-">
+Deploy!
+</a></li><li><a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three#toc-conclusion">
+Conclusion
+</a></li></ul></div>
+<ol>
+<li>Custom error pages</li>
+<li>Unit tests</li>
+<li>Deployment on PythonAnywhere</li>
+</ol>
+<h2 id="toc-custom-error-pages">
+<a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three#toc-custom-error-pages">Custom Error Pages</a>
+</h2>
+<p>Web applications make use of HTTP errors to let users know that something has gone wrong. Default error pages are usually quite plain, so we will create our own custom ones for the following common HTTP errors:</p>
+<ol>
+<li>403 Forbidden: this occurs when a user is logged in (authenticated), but does not have sufficient permissions to access the resource. This is the error we have been throwing when non-admins attempt to access an admin view.</li>
+<li>404 Not Found: this occurs when a user attempts to access a non-existent resource such as an invalid URL, e.g <code>http://127.0.0.1:5000/nothinghere</code>.</li>
+<li>500 Internal Server Error: this is a general error thrown when a more specific error cannot be determined. It means that for some reason, the server cannot process the request.</li>
+</ol>
+<p>We'll start by writing the views for the custom error pages. In your <code>app/__init__.py</code> file, add the following code:</p>
+<pre class="language-python" data-title="python"><code class="language-python"><span class="token comment"># app/__init__.py</span>
+
+<span class="token comment"># update imports</span>
+<span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask<span class="token punctuation">,</span> render_template
+
+<span class="token comment"># existing code remains</span>
+
+<span class="token keyword">def</span> <span class="token function">create_app</span><span class="token punctuation">(</span>config_name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token comment"># existing code remains</span>
+
+    @app<span class="token punctuation">.</span>errorhandler<span class="token punctuation">(</span><span class="token number">403</span><span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">forbidden</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'errors/403.html'</span><span class="token punctuation">,</span> title<span class="token operator">=</span><span class="token string">'Forbidden'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">403</span>
+
+    @app<span class="token punctuation">.</span>errorhandler<span class="token punctuation">(</span><span class="token number">404</span><span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">page_not_found</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'errors/404.html'</span><span class="token punctuation">,</span> title<span class="token operator">=</span><span class="token string">'Page Not Found'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">404</span>
+
+    @app<span class="token punctuation">.</span>errorhandler<span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">internal_server_error</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'errors/500.html'</span><span class="token punctuation">,</span> title<span class="token operator">=</span><span class="token string">'Server Error'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">500</span>
+
+    <span class="token keyword">return</span> app</code></pre>
+<p>We make use of Flask's <code>@app.errorhandler</code> decorator to define the error page views, where we pass in the status code as a parameter. </p>
+<p>Next, we'll create the template files. Create a <code>app/templates/errors</code> directory, and in it, create <code>403.html</code>, <code>404.html</code>, and <code>500.html</code>.</p>
+<pre class="language-html" data-title="html"><code class="language-html"><span class="token comment">&lt;!-- app/templates/errors/403.html --&gt;</span>
+
+{% extends "base.html" %}
+{% block title %}Forbidden{% endblock %}
+{% block body %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>content-section<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>outer<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>middle<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>inner<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text-align: center<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span> 403 Error <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">&gt;</span></span> You do not have sufficient permissions to access this page. <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>hr</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>intro-divider<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{{ url_for(<span class="token punctuation">'</span>home.homepage<span class="token punctuation">'</span>) }}<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-default btn-lg<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>fa fa-home<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>
+                Home
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+{% endblock %}</code></pre>
+<pre class="language-html" data-title="html"><code class="language-html"><span class="token comment">&lt;!-- app/templates/errors/404.html --&gt;</span>
+
+{% extends "base.html" %}
+{% block title %}Page Not Found{% endblock %}
+{% block body %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>content-section<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>outer<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>middle<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>inner<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text-align: center<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span> 404 Error <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">&gt;</span></span> The page you're looking for doesn't exist. <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>hr</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>intro-divider<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{{ url_for(<span class="token punctuation">'</span>home.homepage<span class="token punctuation">'</span>) }}<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-default btn-lg<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>fa fa-home<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>
+                Home
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+{% endblock %}</code></pre>
+<pre class="language-html" data-title="html"><code class="language-html"><span class="token comment">&lt;!-- app/templates/errors/500.html --&gt;</span>
+
+{% extends "base.html" %}
+{% block title %}Internal Server Error{% endblock %}
+{% block body %}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>content-section<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>outer<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>middle<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>inner<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text-align: center<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span> 500 Error <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">&gt;</span></span> The server encountered an internal error. That's all we know. <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>hr</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>intro-divider<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{{ url_for(<span class="token punctuation">'</span>home.homepage<span class="token punctuation">'</span>) }}<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-default btn-lg<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>fa fa-home<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>
+                Home
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+{% endblock %}</code></pre>
+<p>All the templates give a brief description of the error, and a button that links to the homepage. </p>
+<p>Run the app and log in as a non-admin user, then attempt to access <code>http://127.0.0.1:5000/admin/departments</code>. You should get the following page:</p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/UK4wT1TXRKy92WUKdQqC_Screen%20Shot%202016-12-19%20at%208.32.31%20PM.png"></p>
+<p>Now attempt to access this non-existent page: <code>http://127.0.0.1:5000/nothinghere</code>. You should see:</p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/gB4WfFWQ9Wvces6B5eby_Screen%20Shot%202016-12-19%20at%208.34.58%20PM.png"></p>
+<p>To view the internal server error page, we'll create a temporary route where we'll use Flask's <code>abort()</code> function to raise a 500 error. In the <code>app/__init__.py</code> file, add the following:</p>
+<pre class="language-python" data-title="python"><code class="language-python"><span class="token comment"># app/__init__.py</span>
+
+<span class="token comment"># update imports</span>
+<span class="token keyword">from</span> flask <span class="token keyword">import</span> abort<span class="token punctuation">,</span> Flask<span class="token punctuation">,</span> render_template
+
+<span class="token comment"># existing code remains</span>
+
+<span class="token keyword">def</span> <span class="token function">create_app</span><span class="token punctuation">(</span>config_name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+   <span class="token comment"># existing code remains</span>
+
+    @app<span class="token punctuation">.</span>route<span class="token punctuation">(</span><span class="token string">'/500'</span><span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        abort<span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> app</code></pre>
+<p>Go to <code>http://127.0.0.1:5000/500</code>; you should see the following page:</p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/Ufqg3WlqT8qS5iktOmnc_Screen%20Shot%202016-12-19%20at%208.42.58%20PM.png"></p><style>
+.ml-subscribe-form-1112154 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(at top left,#e5d0ad,#d2af73);
+    margin-bottom: 35px;
+    margin-left: -60px;
+    margin-right: -60px;
+    color: #eee;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 10px !important;
+    box-shadow: 5px 5px 0 hsla(38, 48%, 30%, 0.2);
+}
+
+.ml-subscribe-form-1112154 h4 {
+    font-size: 22px;
+    color: #eee;
+    margin-bottom: 20px;
+}
+</style>
+<div id="mlb2-1112154" class="is-hidden-with-account ml-form-embedContainer ml-subscribe-form ml-subscribe-form-1112154 is-hidden-mobile">
+<div class="ml-form-align-center ">
+<div class="ml-form-embedWrapper embedForm">
+<div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+<h3 class="m-b-xs m-t-0">Free Node eBook</h3>
+<p class="m-b" style="color: #555;">Build your first Node apps and learn server-side JavaScript.</p>
+<form class="ml-block-form" action="https://app.mailerlite.com/webforms/submit/c7r3j6" data-code="c7r3j6" method="post" target="_blank">
+<style type="text/css">
+              .ml_message_wrapper {
+                position: absolute !important;
+                left: -9999px !important;
+              }
+            </style>
+<div aria-label="Please leave the following field empty" class="ml_message_wrapper">
+<input type="text" name="ml_message" tabindex="-1" value="" placeholder="Message" autocomplete="off" title="message">
+<input type="text" name="ml_email" tabindex="-1" value="" placeholder="Email" autocomplete="off" title="email">
+<input type="text" name="ml_name" tabindex="-1" value="" placeholder="Name" autocomplete="off" title="name">
+</div>
+<div class="field has-addons">
+<div class="control is-expanded has-icons-left ml-field-group ml-field-email ml-validate-email ml-validate-required">
+<input type="email" class="form-control input is-medium" data-inputmask="" name="fields[email]" value="" placeholder="Email" aria-label="Your Email">
+<div class="icon is-small is-left">
+📧
+</div>
+</div>
+<div class="control">
+<button type="submit" class="primary button is-dark is-medium">Get the eBook</button>
+<button disabled="" style="display: none;" type="button" class="button is-dark is-medium is-loading loading">
+🌟 Magic ✨
+</button>
+</div>
+</div>
+<style type="text/css">
+              .ml-form-recaptcha {
+                margin-bottom: 20px;
+              }
+
+              .ml-form-recaptcha.ml-error iframe {
+                border: solid 1px #ff0000;
+              }
+            </style>
+<input type="hidden" name="ml-submit" value="1">
+</form>
+</div>
+<div class="ml-form-successBody row-success" style="display: none">
+<div class="ml-form-successContent">
+<h3 class="m-b-xs m-t-0">Thank you!</h3>
+<p class="m-b-0" style="color: #555;">You have successfully joined the Scotchy super duper web dev awesome mailing list.<br><br></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+    function ml_webform_success_1112154() {
+        document.querySelector('.ml-subscribe-form-1112154 .row-success').style.display = 'block';
+        document.querySelector('.ml-subscribe-form-1112154 .row-form').style.display = 'none';
+        // var $ = ml_jQuery || jQuery;
+        // $('.ml-subscribe-form-1112154 .row-success').show();
+        // $('.ml-subscribe-form-1112154 .row-form').hide();
+      }
+  </script>
+<img class="lazy" data-src="https://track.mailerlite.com/webforms/o/1112154/c7r3j6?vaa4d608450783acdc64d5338ff94f6d5" width="1" height="1" style="max-width: 1px; max-height: 1px; visibility: hidden; padding: 0; margin: 0; display: block;" border="0">
+<p>Now you can remove the temporary route we just created for the internal server error.</p>
+<h2 id="toc-tests">
+<a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three#toc-tests">Tests</a>
+</h2>
+<p>Now, let's write some tests for the app. The importance of testing software can't be overstated. Tests help ensure that your app is working as expected, without the need for you to manually test all of your app's functionality.</p>
+<p>We'll begin by creating a test database, and give the database user we created in <a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-one">Part One</a> all privileges on it:</p>
+<pre class="language-bash" data-title="bash"><code class="language-bash">$ mysql -u root
+
+mysql<span class="token operator">&gt;</span> CREATE DATABASE dreamteam_test<span class="token punctuation">;</span>
+Query OK, 1 row affected <span class="token punctuation">(</span>0.00 sec<span class="token punctuation">)</span>
+
+mysql<span class="token operator">&gt;</span> GRANT ALL PRIVILEGES ON dreamteam_test <span class="token keyword">.</span> * TO <span class="token string">'dt_admin'</span>@<span class="token string">'localhost'</span><span class="token punctuation">;</span>
+Query OK, 0 rows affected <span class="token punctuation">(</span>0.00 sec<span class="token punctuation">)</span></code></pre>
+<p>Now we need to edit the <code>config.py</code> file to add configurations for testing. Delete the current contents and replace them with the following code:</p>
+<pre class="language-python" data-title="python"><code class="language-python"><span class="token comment"># config.py</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Config</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    Common configurations
+    """</span>
+
+    DEBUG <span class="token operator">=</span> <span class="token boolean">True</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">DevelopmentConfig</span><span class="token punctuation">(</span>Config<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    Development configurations
+    """</span>
+
+    SQLALCHEMY_ECHO <span class="token operator">=</span> <span class="token boolean">True</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">ProductionConfig</span><span class="token punctuation">(</span>Config<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    Production configurations
+    """</span>
+
+    DEBUG <span class="token operator">=</span> <span class="token boolean">False</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">TestingConfig</span><span class="token punctuation">(</span>Config<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    Testing configurations
+    """</span>
+
+    TESTING <span class="token operator">=</span> <span class="token boolean">True</span>
+
+app_config <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'development'</span><span class="token punctuation">:</span> DevelopmentConfig<span class="token punctuation">,</span>
+    <span class="token string">'production'</span><span class="token punctuation">:</span> ProductionConfig<span class="token punctuation">,</span>
+    <span class="token string">'testing'</span><span class="token punctuation">:</span> TestingConfig
+<span class="token punctuation">}</span></code></pre>
+<p>We have put <code>DEBUG = True</code> in the base class, <code>Config</code>, so that it is the default setting. We override this in the <code>ProductionConfig</code> class. In the <code>TestingConfig</code> class, we set the <code>TESTING</code> configuration variable to <code>True</code>.</p>
+<p>We will be writing unit tests. Unit tests are written to test small, individual, and fairly isolated units of code, such as functions. We will make use of <a href="https://pythonhosted.org/Flask-Testing/">Flask-Testing</a>, an extension that provides unit testing utilities for Flask.</p>
+<pre class="language-bash" data-title="bash"><code class="language-bash">$ pip <span class="token function">install</span> Flask-Testing</code></pre>
+<p>Next, create a <code>tests.py</code> file in the root directory of your app. In it, add the following code:</p>
+<pre class="language-python" data-title="python"><code class="language-python"><span class="token comment"># tests.py</span>
+
+<span class="token keyword">import</span> unittest
+
+<span class="token keyword">from</span> flask_testing <span class="token keyword">import</span> TestCase
+
+<span class="token keyword">from</span> app <span class="token keyword">import</span> create_app<span class="token punctuation">,</span> db
+<span class="token keyword">from</span> app<span class="token punctuation">.</span>models <span class="token keyword">import</span> Employee
+
+
+<span class="token keyword">class</span> <span class="token class-name">TestBase</span><span class="token punctuation">(</span>TestCase<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">create_app</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        <span class="token comment"># pass in test configurations</span>
+        config_name <span class="token operator">=</span> <span class="token string">'testing'</span>
+        app <span class="token operator">=</span> create_app<span class="token punctuation">(</span>config_name<span class="token punctuation">)</span>
+        app<span class="token punctuation">.</span>config<span class="token punctuation">.</span>update<span class="token punctuation">(</span>
+            SQLALCHEMY_DATABASE_URI<span class="token operator">=</span><span class="token string">'mysql://dt_admin:dt2016@localhost/dreamteam_test'</span>
+        <span class="token punctuation">)</span>
+        <span class="token keyword">return</span> app
+
+    <span class="token keyword">def</span> <span class="token function">setUp</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        Will be called before every test
+        """</span>
+
+        db<span class="token punctuation">.</span>create_all<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># create test admin user</span>
+        admin <span class="token operator">=</span> Employee<span class="token punctuation">(</span>username<span class="token operator">=</span><span class="token string">"admin"</span><span class="token punctuation">,</span> password<span class="token operator">=</span><span class="token string">"admin2016"</span><span class="token punctuation">,</span> is_admin<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># create test non-admin user</span>
+        employee <span class="token operator">=</span> Employee<span class="token punctuation">(</span>username<span class="token operator">=</span><span class="token string">"test_user"</span><span class="token punctuation">,</span> password<span class="token operator">=</span><span class="token string">"test2016"</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># save users to database</span>
+        db<span class="token punctuation">.</span>session<span class="token punctuation">.</span>add<span class="token punctuation">(</span>admin<span class="token punctuation">)</span>
+        db<span class="token punctuation">.</span>session<span class="token punctuation">.</span>add<span class="token punctuation">(</span>employee<span class="token punctuation">)</span>
+        db<span class="token punctuation">.</span>session<span class="token punctuation">.</span>commit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">tearDown</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        Will be called after every test
+        """</span>
+
+        db<span class="token punctuation">.</span>session<span class="token punctuation">.</span>remove<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        db<span class="token punctuation">.</span>drop_all<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    unittest<span class="token punctuation">.</span>main<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>In the base class above, <code>TestBase</code>, we have a <code>create_app</code> method, where we pass in the configurations for testing.</p>
+<p>We also have two other methods: <code>setUp</code> and <code>tearDown</code>. The <code>setUp</code> method will be called automatically before every test we run. In it, we create two test users, one admin and one non-admin, and save them to the database. The <code>tearDown</code> method will be called automatically after every test. In it, we remove the database session and drop all database tables. </p>
+<p>To run the tests, we will run the <code>tests.py</code> file:</p>
+<pre class="language-bash" data-title="bash"><code class="language-bash">$ python tests.py
+
+----------------------------------------------------------------------
+Ran 0 tests <span class="token keyword">in</span> 0.000s
+
+OK</code></pre>
+<p>The output above lets us know that our test setup is OK. Now let's write some tests.</p>
+<pre class="language-python" data-title="python"><code class="language-python">
+<span class="token comment"># tests.py</span>
+
+<span class="token comment"># update imports</span>
+
+<span class="token keyword">import</span> os
+
+<span class="token keyword">from</span> flask <span class="token keyword">import</span> abort<span class="token punctuation">,</span> url_for
+
+<span class="token keyword">from</span> app<span class="token punctuation">.</span>models <span class="token keyword">import</span> Department<span class="token punctuation">,</span> Employee<span class="token punctuation">,</span> Role
+
+<span class="token comment"># add the following after the TestBase class</span>
+
+<span class="token keyword">class</span> <span class="token class-name">TestModels</span><span class="token punctuation">(</span>TestBase<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">test_employee_model</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        Test number of records in Employee table
+        """</span>
+        self<span class="token punctuation">.</span>assertEqual<span class="token punctuation">(</span>Employee<span class="token punctuation">.</span>query<span class="token punctuation">.</span>count<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">test_department_model</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        Test number of records in Department table
+        """</span>
+
+        <span class="token comment"># create test department</span>
+        department <span class="token operator">=</span> Department<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"IT"</span><span class="token punctuation">,</span> description<span class="token operator">=</span><span class="token string">"The IT Department"</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># save department to database</span>
+        db<span class="token punctuation">.</span>session<span class="token punctuation">.</span>add<span class="token punctuation">(</span>department<span class="token punctuation">)</span>
+        db<span class="token punctuation">.</span>session<span class="token punctuation">.</span>commit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        self<span class="token punctuation">.</span>assertEqual<span class="token punctuation">(</span>Department<span class="token punctuation">.</span>query<span class="token punctuation">.</span>count<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">test_role_model</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        Test number of records in Role table
+        """</span>
+
+        <span class="token comment"># create test role</span>
+        role <span class="token operator">=</span> Role<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"CEO"</span><span class="token punctuation">,</span> description<span class="token operator">=</span><span class="token string">"Run the whole company"</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># save role to database</span>
+        db<span class="token punctuation">.</span>session<span class="token punctuation">.</span>add<span class="token punctuation">(</span>role<span class="token punctuation">)</span>
+        db<span class="token punctuation">.</span>session<span class="token punctuation">.</span>commit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        self<span class="token punctuation">.</span>assertEqual<span class="token punctuation">(</span>Role<span class="token punctuation">.</span>query<span class="token punctuation">.</span>count<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">TestViews</span><span class="token punctuation">(</span>TestBase<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">test_homepage_view</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        Test that homepage is accessible without login
+        """</span>
+        response <span class="token operator">=</span> self<span class="token punctuation">.</span>client<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url_for<span class="token punctuation">(</span><span class="token string">'home.homepage'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertEqual<span class="token punctuation">(</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">test_login_view</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        Test that login page is accessible without login
+        """</span>
+        response <span class="token operator">=</span> self<span class="token punctuation">.</span>client<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url_for<span class="token punctuation">(</span><span class="token string">'auth.login'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertEqual<span class="token punctuation">(</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">test_logout_view</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        Test that logout link is inaccessible without login
+        and redirects to login page then to logout
+        """</span>
+        target_url <span class="token operator">=</span> url_for<span class="token punctuation">(</span><span class="token string">'auth.logout'</span><span class="token punctuation">)</span>
+        redirect_url <span class="token operator">=</span> url_for<span class="token punctuation">(</span><span class="token string">'auth.login'</span><span class="token punctuation">,</span> <span class="token builtin">next</span><span class="token operator">=</span>target_url<span class="token punctuation">)</span>
+        response <span class="token operator">=</span> self<span class="token punctuation">.</span>client<span class="token punctuation">.</span>get<span class="token punctuation">(</span>target_url<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertEqual<span class="token punctuation">(</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">,</span> <span class="token number">302</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertRedirects<span class="token punctuation">(</span>response<span class="token punctuation">,</span> redirect_url<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">test_dashboard_view</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        Test that dashboard is inaccessible without login
+        and redirects to login page then to dashboard
+        """</span>
+        target_url <span class="token operator">=</span> url_for<span class="token punctuation">(</span><span class="token string">'home.dashboard'</span><span class="token punctuation">)</span>
+        redirect_url <span class="token operator">=</span> url_for<span class="token punctuation">(</span><span class="token string">'auth.login'</span><span class="token punctuation">,</span> <span class="token builtin">next</span><span class="token operator">=</span>target_url<span class="token punctuation">)</span>
+        response <span class="token operator">=</span> self<span class="token punctuation">.</span>client<span class="token punctuation">.</span>get<span class="token punctuation">(</span>target_url<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertEqual<span class="token punctuation">(</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">,</span> <span class="token number">302</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertRedirects<span class="token punctuation">(</span>response<span class="token punctuation">,</span> redirect_url<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">test_admin_dashboard_view</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        Test that dashboard is inaccessible without login
+        and redirects to login page then to dashboard
+        """</span>
+        target_url <span class="token operator">=</span> url_for<span class="token punctuation">(</span><span class="token string">'home.admin_dashboard'</span><span class="token punctuation">)</span>
+        redirect_url <span class="token operator">=</span> url_for<span class="token punctuation">(</span><span class="token string">'auth.login'</span><span class="token punctuation">,</span> <span class="token builtin">next</span><span class="token operator">=</span>target_url<span class="token punctuation">)</span>
+        response <span class="token operator">=</span> self<span class="token punctuation">.</span>client<span class="token punctuation">.</span>get<span class="token punctuation">(</span>target_url<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertEqual<span class="token punctuation">(</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">,</span> <span class="token number">302</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertRedirects<span class="token punctuation">(</span>response<span class="token punctuation">,</span> redirect_url<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">test_departments_view</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        Test that departments page is inaccessible without login
+        and redirects to login page then to departments page
+        """</span>
+        target_url <span class="token operator">=</span> url_for<span class="token punctuation">(</span><span class="token string">'admin.list_departments'</span><span class="token punctuation">)</span>
+        redirect_url <span class="token operator">=</span> url_for<span class="token punctuation">(</span><span class="token string">'auth.login'</span><span class="token punctuation">,</span> <span class="token builtin">next</span><span class="token operator">=</span>target_url<span class="token punctuation">)</span>
+        response <span class="token operator">=</span> self<span class="token punctuation">.</span>client<span class="token punctuation">.</span>get<span class="token punctuation">(</span>target_url<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertEqual<span class="token punctuation">(</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">,</span> <span class="token number">302</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertRedirects<span class="token punctuation">(</span>response<span class="token punctuation">,</span> redirect_url<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">test_roles_view</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        Test that roles page is inaccessible without login
+        and redirects to login page then to roles page
+        """</span>
+        target_url <span class="token operator">=</span> url_for<span class="token punctuation">(</span><span class="token string">'admin.list_roles'</span><span class="token punctuation">)</span>
+        redirect_url <span class="token operator">=</span> url_for<span class="token punctuation">(</span><span class="token string">'auth.login'</span><span class="token punctuation">,</span> <span class="token builtin">next</span><span class="token operator">=</span>target_url<span class="token punctuation">)</span>
+        response <span class="token operator">=</span> self<span class="token punctuation">.</span>client<span class="token punctuation">.</span>get<span class="token punctuation">(</span>target_url<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertEqual<span class="token punctuation">(</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">,</span> <span class="token number">302</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertRedirects<span class="token punctuation">(</span>response<span class="token punctuation">,</span> redirect_url<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">test_employees_view</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        Test that employees page is inaccessible without login
+        and redirects to login page then to employees page
+        """</span>
+        target_url <span class="token operator">=</span> url_for<span class="token punctuation">(</span><span class="token string">'admin.list_employees'</span><span class="token punctuation">)</span>
+        redirect_url <span class="token operator">=</span> url_for<span class="token punctuation">(</span><span class="token string">'auth.login'</span><span class="token punctuation">,</span> <span class="token builtin">next</span><span class="token operator">=</span>target_url<span class="token punctuation">)</span>
+        response <span class="token operator">=</span> self<span class="token punctuation">.</span>client<span class="token punctuation">.</span>get<span class="token punctuation">(</span>target_url<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertEqual<span class="token punctuation">(</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">,</span> <span class="token number">302</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertRedirects<span class="token punctuation">(</span>response<span class="token punctuation">,</span> redirect_url<span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">TestErrorPages</span><span class="token punctuation">(</span>TestBase<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">test_403_forbidden</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># create route to abort the request with the 403 Error</span>
+        @self<span class="token punctuation">.</span>app<span class="token punctuation">.</span>route<span class="token punctuation">(</span><span class="token string">'/403'</span><span class="token punctuation">)</span>
+        <span class="token keyword">def</span> <span class="token function">forbidden_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            abort<span class="token punctuation">(</span><span class="token number">403</span><span class="token punctuation">)</span>
+
+        response <span class="token operator">=</span> self<span class="token punctuation">.</span>client<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'/403'</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertEqual<span class="token punctuation">(</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">,</span> <span class="token number">403</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertTrue<span class="token punctuation">(</span><span class="token string">"403 Error"</span> <span class="token keyword">in</span> response<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">test_404_not_found</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        response <span class="token operator">=</span> self<span class="token punctuation">.</span>client<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'/nothinghere'</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertEqual<span class="token punctuation">(</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">,</span> <span class="token number">404</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertTrue<span class="token punctuation">(</span><span class="token string">"404 Error"</span> <span class="token keyword">in</span> response<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">test_500_internal_server_error</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># create route to abort the request with the 500 Error</span>
+        @self<span class="token punctuation">.</span>app<span class="token punctuation">.</span>route<span class="token punctuation">(</span><span class="token string">'/500'</span><span class="token punctuation">)</span>
+        <span class="token keyword">def</span> <span class="token function">internal_server_error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            abort<span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span>
+
+        response <span class="token operator">=</span> self<span class="token punctuation">.</span>client<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'/500'</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertEqual<span class="token punctuation">(</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>assertTrue<span class="token punctuation">(</span><span class="token string">"500 Error"</span> <span class="token keyword">in</span> response<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    unittest<span class="token punctuation">.</span>main<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>We've added three classes: <code>TestModels</code>, <code>TestViews</code> and <code>TestErrorPages</code>. </p>
+<p>The first class has methods to test that each of the models in the app are working as expected. This is done by querying the database to check that the correct number of records exist in each table.</p>
+<p>The second class has methods that test the views in the app to ensure the expected status code is returned. For non-restricted views, such as the homepage and the login page, the <code>200 OK</code> code should be returned; this means that everything is OK and the request has succeeded. For restricted views that require authenticated access, a <code>302 Found</code> code is returned. This means that the page is redirected to an existing resource, in this case, the login page. We test both that the <code>302 Found</code> code is returned and that the page redirects to the login page.</p>
+<p>The third class has methods to ensure that the error pages we created earlier are shown when the respective error occurs.</p>
+<p>Note that each test method begins with <code>test</code>. This is deliberate, because <code>unittest</code>, the Python unit testing framework, uses the <code>test</code> prefix to automatically identify test methods. Also note that we have not written tests for the front-end to ensure users can register and login, and to ensure administrators can create departments and roles and assign them to employees. This can be done using a tool like <a href="http://www.seleniumhq.org/projects/webdriver/">Selenium Webdriver</a>; however this is outside the scope of this tutorial.</p>
+<p>Run the tests again:</p>
+<pre class="language-bash" data-title="bash"><code class="language-bash">
+$ python tests.py
+<span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>
+----------------------------------------------------------------------
+Ran 14 tests <span class="token keyword">in</span> 2.313s
+
+OK</code></pre>
+<p>Success! The tests are passing.</p>
+<h2 id="toc-deploy-">
+<a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three#toc-deploy-">Deploy!</a>
+</h2>
+<p>Now for the final part of the tutorial: deployment. So far, we've been running the app locally. In this stage, we will publish the application on the internet so that other people can use it. We will use <a href="https://www.pythonanywhere.com/">PythonAnywhere</a>, a Platform as a Service (PaaS) that is easy to set up, secure, and scalable, not to mention free for basic accounts! </p>
+<h3 id="toc-pythonanywhere-set-up">PythonAnywhere Set-Up</h3>
+<p>Create a free PythonAnywhere account <a href="https://www.pythonanywhere.com/registration/register/beginner/">here</a> if you don't already have one. Be sure to select your username carefully since the app will be accessible at <code>your-username.pythonanywhere.com</code>.</p>
+<p>Once you've signed up, <code>your-username.pythonanywhere.com</code> should show this page:</p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/K5JRcBqoTcytpmPr4QNP_Screen%20Shot%202017-01-02%20at%203.07.57%20PM.png"></p>
+<p>We will use git to upload the app to PythonAnywhere. If you've been pushing your code to cloud repository management systems like <a href="https://bitbucket.org/">Bitbucket</a>, <a href="https://about.gitlab.com/">Gitlab</a> or <a href="https://scotch.io/tutorials/github.com/">Github</a>, that's great! If not, now's the time to do it. Remember that we won't be pushing the <code>instance</code> directory, so be sure to include it in your <code>.gitignore</code> file, like so:</p>
+<pre class="language-bash" data-title="bash"><code class="language-bash"><span class="token comment"># .gitignore</span>
+
+*.pyc
+instance/</code></pre>
+<p>Also, ensure that your <code>requirements.txt</code> file is up to date using the <code>pip freeze</code> command before pushing your code:</p>
+<pre class="language-bash" data-title="bash"><code class="language-bash">$ pip freeze <span class="token operator">&gt;</span> requirements.txt</code></pre>
+<p>Now, log in to your PythonAnywhere account. In your dashboard, there's a <code>Consoles</code> tab; use it to start a new Bash console. </p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/DiF4e6kTgK9BI0voIjJY_Screen%20Shot%202017-01-03%20at%203.22.04%20PM.png"></p>
+<p>In the PythonAnywhere Bash console, clone your repository.</p>
+<pre class="language-bash" data-title="bash"><code class="language-bash">$ <span class="token function">git</span> clone https://github.com/andela-mnzomo/project-dream-team-three</code></pre>
+<p>Next we will create a virtualenv, then install the dependencies from the <code>requirements.txt</code> file. Because PythonAnywhere installs <a href="https://virtualenvwrapper.readthedocs.io/en/latest/">virtualenvwrapper</a> for all users by default, we can use its commands:</p>
+<pre class="language-bash" data-title="bash"><code class="language-bash">$ mkvirtualenv dream-team
+$ <span class="token function">cd</span> project-dream-team-three
+$ pip <span class="token function">install</span> -r requirements.txt</code></pre>
+<p>We've created a virtualenv called <code>dream-team</code>. The virtualenv is automatically activated. We then entered the project directory and installed the dependencies. </p>
+<p>Now, in the Web tab on your dashboard, create a new web app. </p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/e7V0C5dvR7R6BfDoTwfJ_Screen%20Shot%202017-01-03%20at%203.22.51%20PM.png"></p>
+<p>Select the Manual Configuration option (<strong>not</strong> the Flask option), and choose Python 2.7 as your Python version. Once the web app is created, its configurations will be loaded. Scroll down to the Virtualenv section, and enter the name of the virtualenv you just created:</p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/fHiIGtGYTOmhabfn8Ig2_Screen%20Shot%202017-01-03%20at%203.30.03%20PM.png"></p>
+<h3 id="toc-database-configuration">Database Configuration</h3>
+<p>Next, we will set up the MySQL production database. In the Databases tab of your PythonAnywhere dashboard, set a new password and then initialize a MySQL server:</p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/twvZCyDpRqOMCZN45k25_Screen%20Shot%202017-01-03%20at%203.31.18%20PM.png"></p>
+<p>The password above will be your database user password. Next, create a new database if you wish. PythonAnywhere already has a default database which you can use.</p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/GcyKxAJRRB2Rqfny7ys1_database%20name.png"></p>
+<p>By default, the database user is your username, and has all privileges granted on any databases created. Now, we need to migrate the database and populate it with the tables. In a Bash console on PythonAnywhere, we will run the <code>flask db upgrade</code> command, since we already have the migrations directory that we created locally. Before running the commands, ensure you are in your virtualenv as well as in the project directory.</p>
+<pre class="language-bash" data-title="bash"><code class="language-bash">$ <span class="token function">export</span> FLASK_CONFIG<span class="token operator">=</span>production
+$ <span class="token function">export</span> FLASK_APP<span class="token operator">=</span>run.py
+$ <span class="token function">export</span> SQLALCHEMY_DATABASE_URI<span class="token operator">=</span><span class="token string">'mysql://your-username:your-password@your-host-address/your-database-name'</span>
+$ flask db upgrade</code></pre>
+<p>When setting the <code>SQLALCHEMY_DATABASE_URI</code> environment variable, remember to replace <code>your-username</code>, <code>your-password</code>, <code>your-host-address</code> and <code>your-database-name</code> with their correct values. The username, host address and database name can be found in the MySQL settings in the Databases tab on your dashboard. For example, using the information below, my database URI is: <code>mysql://projectdreamteam:password@projectdreamteam.mysql.pythonanywhere-services.com/projectdreamteam$dreamteam_db</code></p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/3waokLcVQrSXbO36a6MF_database.jpg"></p>
+<h3 id="toc-wsgi-file">WSGI File</h3>
+<p>Now we will edit the WSGI file, which PythonAnywhere uses to serve the app. Remember that we are not pushing the <code>instance</code> directory to version control. We therefore need to configure the environment variables for production, which we will do in the WSGI file.</p>
+<p>In the Code section of the Web tab on your dashboard, click on the link to the WSGI configuration file.</p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/gcvgsyaBSLixNO5Vxjie_wsgi%20file.png"></p>
+<p>Delete all the current contents of the file, and replace them with the following:</p>
+<pre class="language-python" data-title="python"><code class="language-python"><span class="token keyword">import</span> os
+<span class="token keyword">import</span> sys
+
+path <span class="token operator">=</span> <span class="token string">'/home/your-username/your-project-directory-name'</span>
+<span class="token keyword">if</span> path <span class="token operator">not</span> <span class="token keyword">in</span> sys<span class="token punctuation">.</span>path<span class="token punctuation">:</span>
+    sys<span class="token punctuation">.</span>path<span class="token punctuation">.</span>append<span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+
+os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">'FLASK_CONFIG'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'production'</span>
+os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">'SECRET_KEY'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'p9Bv&lt;3Eid9%$i01'</span>
+os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">'SQLALCHEMY_DATABASE_URI'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'mysql://your-username:your-password@your-host-address/your-database-name'</span>
+
+<span class="token keyword">from</span> run <span class="token keyword">import</span> app <span class="token keyword">as</span> application</code></pre>
+<p>In the file above, we tell PythonAnywhere to get the variable <code>app</code> from the <code>run.py</code> file, and serve it as the application. We also set the <code>FLASK_CONFIG</code>, <code>SECRET_KEY</code> and <code>SQLALCHEMY_DATABASE_URI</code> environment variables. Feel free to alter the secret key. Note that the <code>path</code> variable should contain your username and project directory name, so be sure to replace it with the correct values. The same applies for the database URI environment variable.</p>
+<p>We also need to edit our local <code>app/__init__py</code> file to prevent it from loading the <code>instance/config.py</code> file in production, as well as to load the configuration variables we've set:</p>
+<pre class="language-python" data-title="python"><code class="language-python"><span class="token comment"># app/__init__.py</span>
+
+<span class="token comment"># update imports</span>
+
+<span class="token keyword">import</span> os
+
+<span class="token comment"># existing code remains</span>
+
+<span class="token keyword">def</span> <span class="token function">create_app</span><span class="token punctuation">(</span>config_name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> os<span class="token punctuation">.</span>getenv<span class="token punctuation">(</span><span class="token string">'FLASK_CONFIG'</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">"production"</span><span class="token punctuation">:</span>
+        app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+        app<span class="token punctuation">.</span>config<span class="token punctuation">.</span>update<span class="token punctuation">(</span>
+            SECRET_KEY<span class="token operator">=</span>os<span class="token punctuation">.</span>getenv<span class="token punctuation">(</span><span class="token string">'SECRET_KEY'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            SQLALCHEMY_DATABASE_URI<span class="token operator">=</span>os<span class="token punctuation">.</span>getenv<span class="token punctuation">(</span><span class="token string">'SQLALCHEMY_DATABASE_URI'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">,</span> instance_relative_config<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+        app<span class="token punctuation">.</span>config<span class="token punctuation">.</span>from_object<span class="token punctuation">(</span>app_config<span class="token punctuation">[</span>config_name<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        app<span class="token punctuation">.</span>config<span class="token punctuation">.</span>from_pyfile<span class="token punctuation">(</span><span class="token string">'config.py'</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># existing code remains</span></code></pre>
+<p>Push your changes to version control, and pull them on the PythonAnywhere Bash console:</p>
+<pre class="language-bash" data-title="bash"><code class="language-bash">$ <span class="token function">git</span> pull origin master</code></pre>
+<p>Now let's try loading the app on PythonAnywhere. First, we need to reload the app on the Web tab in the dashboard:</p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/9uUb5DUvQWWjMSDlK5d5_Screen%20Shot%202017-01-03%20at%204.03.28%20PM.png"></p>
+<p>Now go to your app URL:</p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/ja3sobr0RTO7ivP5YI5A_python%20anywhere.png"></p>
+<p>Great, it works! Try registering a new user and logging in. This should work just as it did locally.</p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/iHgndWTw6X1VROIUtk9g_register.png"></p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/OPlsZYIQQSWHQ7dAz9hN_login.png"></p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/iqWpZTumRBagdvhY3ms7_dashboard.png"></p>
+<h3 id="toc-admin-user">Admin User</h3>
+<p>We will now create an admin user the same way we did locally. Open the Bash console, and run the following commands:</p>
+<pre class="language-bash" data-title="bash"><code class="language-bash">$ flask shell
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> from app.models <span class="token function">import</span> Employee
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> from app <span class="token function">import</span> db
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> admin <span class="token operator">=</span> Employee<span class="token punctuation">(</span>email<span class="token operator">=</span><span class="token string">"admin@admin.com"</span>,username<span class="token operator">=</span><span class="token string">"admin"</span>,password<span class="token operator">=</span><span class="token string">"admin2016"</span>,is_admin<span class="token operator">=</span>True<span class="token punctuation">)</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> db.session.add<span class="token punctuation">(</span>admin<span class="token punctuation">)</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> db.session.commit<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>Now you can login as an admin user and add departments and roles, and assign them to employees.</p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/c07SFY53Tcum6HpgHnym_admin%20login.png"></p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/zUNwr0kLQtCuYkWBopog_admin%20dashboard.png"></p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/Gxv6N95WSQexztQ9OeSe_add%20dept.jpg"></p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/Si288uqbT3yB72K44wMD_add%20roles.jpg"></p>
+<p><img alt="" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/acb1icFxTEK9iV5qwVl0_assign%20roles%20employees.jpg"></p>
+<h2 id="toc-conclusion">
+<a href="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three#toc-conclusion">Conclusion</a>
+</h2>
+<p>Congratulations on successfully deploying your first Flask CRUD web app! From setting up a MySQL database, to creating models, blueprints (with forms and views), templates, custom error pages, tests, and finally deploying the app on PythonAnywhere, you now have a strong foundation in web development with Flask. I hope this has been as fun and educational for you as it has for me! I'm looking forward to hearing about your experiences in the comments below.</p>
+</div>
+<p>
+Like this article?
+<a href="https://twitter.com/mbithenzomo" title="Follow @mbithenzomo on Twitter">
+Follow @mbithenzomo on Twitter
+</a>
+</p>
+<div id="comments" class="p-t-md" style="
+            background: #faf8f4;
+            padding: 0 25px;
+            border-radius: 10px;
+            border: solid 1px #f8f2e8;
+            box-shadow: 0 0px 3px 0 rgba(88,88,102,.07);
+        ">
+<script defer="" src="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/sp_D7GE1sbz" data-spotim-module="spotim-launcher" data-post-url="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three" data-post-id="2486" data-ready="true">
+            </script>
+<div class="spot-im-registration-module" data-spot-id="sp_D7GE1sbz"></div><div class="spot-im-conversation-module" data-spot-id="sp_D7GE1sbz" data-spotim-module="spotim-launcher" data-post-url="https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three" data-post-id="2486"></div></div>
+</div>
+</div>
+<div class="column is-narrow is-right">
+<div class="article-inner">
+<div class="article-sidebar">
+<div class="sidebar-sticky">
+<div class="sidebar-item" style="height: 35%; top: 0">
+<div class="make-me-sticky">
+<div class="is-hidden-with-subscription has-text-centered">
+<div id="bsa-zone_1537909991-1_123456"></div>
+</div>
+<div class="m-t">
+<div class="react-syndicate" data-is-sidebar="true" data-take="1"><div><div class="is-fullwidth"><div class="card is-scotch is-promo"><a class="card-image" href="https://synd.co/2TwXIJc" title="Building an Online Retail Dashboard in React"><img src="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/uktklt6pr6k8e9vcc2qj.webp" alt="Building an Online Retail Dashboard in React"></a></div></div></div></div>
+</div>
+</div>
+</div>
+<div class="sidebar-item card is-author" style="height: 20%; top: 36%">
+<div class="make-me-sticky">
+<div class="article-author is-small is-vertical">
+<a href="https://scotch.io/@mbithenzomo" class="author-avatar image is-128x128" title="Mbithe Nzomo&#39;s Avatar">
+<img class="lazy" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,h_auto,q_auto:good,f_auto,c_fill,g_face/media/8943/DIpEAHkMScuUwZL9s5Q1_mbithe.jpg" alt="Mbithe Nzomo">
+</a>
+<h3 class="title is-5">
+<a href="https://scotch.io/@mbithenzomo" title="Mbithe Nzomo">Mbithe Nzomo</a>
+</h3>
+<div class="m-b-sm">
+<a href="https://twitter.com/intent/follow?screen_name=mbithenzomo" class="button is-info is-small ">
+Follow @mbithenzomo
+</a>
+</div>
+<div class="author-bio"><p>I'm a software engineer from Nairobi, Kenya with interests in Machine Learning and Artificial Intelligence. I'm currently a postgraduate student at The University of Manchester, studying Advanced Computer Science with a specialisation in AI.</p></div>
+<div class="author-action m-t-sm m-b-0">
+<a href="https://scotch.io/@mbithenzomo" title="View Mbithe Nzomo&#39;s Profile" class="button is-dark is-rounded is-fullwidth">
+View My 8 Posts
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebar-item" style="height: 40%; top: 57%">
+<div class="make-me-sticky">
+<div class="is-hidden-with-subscription has-text-centered">
+<div id="bsa-zone_1537909991-3_123456"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer>
+<div class="article-end">
+<div class="section is-small" style="background: #fff">
+<div data-spotim-module="recirculation" data-spot-id="sp_D7GE1sbz"></div>
+</div>
+<section class="section is-author p-y-lg" style="background: #CBCED4">
+<div class="container">
+<div class="columns">
+<div class="column">
+<div class="article-author is-large is-horizontal">
+<a href="https://scotch.io/@mbithenzomo" class="author-avatar image " title="Mbithe Nzomo&#39;s Avatar">
+<img class="lazy" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,h_auto,q_auto:good,f_auto,c_fill,g_face/media/8943/DIpEAHkMScuUwZL9s5Q1_mbithe.jpg" alt="Mbithe Nzomo">
+</a>
+<h3 class="title is-5">
+<a href="https://scotch.io/@mbithenzomo" title="Mbithe Nzomo">Mbithe Nzomo</a>
+</h3>
+<div class="m-b-sm">
+<a href="https://twitter.com/intent/follow?screen_name=mbithenzomo" class="button is-info is-small ">
+Follow @mbithenzomo
+</a>
+</div>
+<div class="author-bio"><p>I'm a software engineer from Nairobi, Kenya with interests in Machine Learning and Artificial Intelligence. I'm currently a postgraduate student at The University of Manchester, studying Advanced Computer Science with a specialisation in AI.</p></div>
+<div class="links">
+<div class="author-links">
+<a href="https://twitter.com/mbithenzomo" target="_blank" rel="noopener noreferrer" title="Twitter @mbithenzomo">
+<span class="icon color-twitter">
+<svg class="svg-inline--fa fa-twitter fa-w-16 fa-2x" aria-hidden="true" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg><!-- <i class="fab fa-twitter fa-2x"></i> -->
+</span>
+</a>
+<a href="https://github.com/mbithenzomo" target="_blank" rel="noopener noreferrer" title="GitHub">
+<span class="icon icon-github has-text-grey-dark">
+<svg class="svg-inline--fa fa-github-alt fa-w-15 fa-2x" data-fa-transform="down-0.75" aria-hidden="true" data-prefix="fab" data-icon="github-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512" data-fa-i2svg="" style="transform-origin: 0.46875em 0.546875em;"><g transform="translate(240 256)"><g transform="translate(0, 24)  scale(1, 1)  rotate(0 0 0)"><path fill="currentColor" d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z" transform="translate(-240 -256)"></path></g></g></svg><!-- <i class="fab fa-github-alt fa-2x" data-fa-transform="down-0.75"></i> -->
+</span>
+</a>
+<a href="https://mbithe.me/" target="_blank" rel="noopener noreferrer" title="Website https://mbithe.me">
+<span class="icon has-text-primary">
+<svg class="svg-inline--fa fa-browser fa-w-16 fa-2x" aria-hidden="true" data-prefix="fal" data-icon="browser" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM32 80c0-8.8 7.2-16 16-16h48v64H32V80zm448 352c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16V160h448v272zm0-304H128V64h336c8.8 0 16 7.2 16 16v48z"></path></svg><!-- <i class="fal fa-browser fa-2x"></i> -->
+</span>
+</a>
+</div>
+</div>
+<div class="author-action m-t-sm m-b-0">
+<a href="https://scotch.io/@mbithenzomo" title="View Mbithe Nzomo&#39;s Profile" class="button is-dark is-rounded is-fullwidth">
+View My 8 Posts
+</a>
+</div>
+</div>
+</div>
+<div class="column is-narrow is-hidden-touch" style="align-self: center; flex-basis: 500px">
+<div class="card is-scotch  ">
+<a class="card-image" href="https://scotch.io/bar-talk/flask-or-django-an-in-depth-comparison-part-one" title="Flask Or Django? An In-Depth Comparison | Part One">
+<div class="image is-2by1 lazy" data-src="https://scotch-res.cloudinary.com/image/upload/w_auto,q_auto:good,f_auto/media/8943/RO8jqQByS5Ob7FEyDhOw_flask-or-django-1.jpg">
+</div>
+</a>
+<div class="card-content">
+<h2 class="title is-4">
+<a href="https://scotch.io/bar-talk/flask-or-django-an-in-depth-comparison-part-one">Flask Or Django? An In-Depth Comparison | Part One</a>
+</h2>
+<p>A guide to help you choose one of Python's two most popular frameworks for your next web project</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</footer>
+</article>
+</main>
+
+<footer id="scotchy-footer" class="section is-small p-t-xs p-b-sm">
+<div class="footer__projects is-hidden-mobile is-hidden-tablet-only">
+<div class="container">
+<div class="columns center-flex-v">
+<div class="column is-8">
+<div class="footer__about">
+<div class="about__title">
+<div class="logo center-flex-v">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="70">
+<image width="100%" height="100%" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAd8AAAM5BAMAAAC0rCbdAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAGFBMVEUAAAD////NqEjt1H+lfjGkfjCkfS8AAAB5F91IAAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAALiMAAC4jAXilP3YAAAAHdElNRQfhAwIPGBhmTpfuAAAQs0lEQVR42u3cS24cSw4FUKVdC8jawYMGGj9ArbnQXUt4mjcagva/hLY+lqsq40MyyCCZde/MhpQZJy8jsiwbvrujZDm+ZyV9rUM+VnfUvOLNgY8ZwJrLAzhWAA54xRRgb1c1+i8RgGMFYIABBhhggAMFYIABplwwOlhxfQAHC8DhLghwsPUF/zm8/msT4GgBGGCAAQYY4EABGGCACdcLD9ZbIMDRAnCw6yUBe6sa0X6NABwtAAMMMMAAAxwoAAMMMMCby8UHq60Q4HABONTlsoBXb1UrAAMMMMAAe6MABhjgoaslAGstEeB4AVjhat6mZnTPVYDjBWCA2RfLAFZaI8ABYwBevU0AXwRggAHuXCsFWGeRAEcMwMPX8hZ1onmyAhwxAI9eKgdYZZUAhwzAo5davUW9AAwwwM0rJQFrLBPgmNEGe3u60TtqAI4ZgMculAWssE6Ag0YZvHp7+gEYYIAb10kDHl8owFGjC/bWEKJ12AAcNUrgLJ8s1VYKcNiogldvDSUAA0y/SiLw6FIBjhtNsLeFFJ3jBuC4UQHn+aCltFaAA0cRvHpbaAEYYOo1UoHHFgtw5OiBvSXEaBw4twbO9LlDZbUAhw7A0kus3hJqABZeIRl4ZLkAx44W2NtBzviRc2vgXK9hhfUCHDxK4NXbQQ/Aou9PB5YvGODo0QF7KxgZPXRuDZztNTy8YoDDRwW8eis4GQOneyuNLhng+AFY8N3eBlaGztl8b6XBNQOcIArg1dvAC8Ds700Jli0a4AwZB3sLmBk4eDK+lYZWDXCKDINXbwE3cnDKQ3pk2QDnyCjYe/3zwDkP6YF1A5wkAPO+cfVePz9ScNK3knzhAGfJGNh79YIID5+sh7R45QCnyRB49V69JDJw2kNaunSA80S09LxnlnDtACcKwJQkPrNkiwc4U+Rg75ULI/hYnPnMEq0e4FQRg1fvlUvDB6c+pCXLBzhX2MvPfWYJ1g9wsgDcS/Iziw8AOFuYgOxbmC0AOF0Abif9mcUlAJwvLEL+Lcw0AJwwALeygzOLhwA4YxiIPWxhlgLglAG4nl2cWRwGwDlDZuxjCzMcACcN2bGTLUyHAJw1AJezlzOLLAE4bYiS3WxhKgXgvCFR9rOFiRaAEwfgUnZ0ZtEwAGcOAbOnLUzSAJw6BM2utjCFA3DuAHydfZ1ZBA/AydP17GwL90EAZ08HtLct3BUBnD4AX2Z3Z1aPBHD+NEn728IdE8A7CMDn2eGZ1UYBvIc0UHvcwk0VwLsIwH+yyzOrxQJ4H6my9rmFGy6AdxKAf2enZ1YdBnDs/Lj/yl9jYG8HU0shL2VwojPrktslV2R5wPeFtMTJwT/u75niJnj19vRyX0tDXAbnOKTv7wXiMi0F+P5eIs4Lvm9HAvYmtfKj461WXDye4h/SXW9VXLTFB/e9taHOCaZ4KxU3wKs3a8xbq7gEDn5IE72Viku42GCqt1JxOjDhgG5WXAd7y4a95YoLB1ToQ5rjLVZc0EUGs7zFinOBWQPNBK/eOAVvcaa34LiHNNdbrHjLCwvme0sV5wGzB5oH9uapeEsznQYs8hYq3pzJQd9KsoKr4GPjN0JE6C3MdBKw1EsGr97Cy4gLLsx0BrDcW6j4GhzxNTzgrYHX6q8DZKTg7UwnAI94qWBvo5p3O9NLdPDQQPfB8V7Dg97NTF8Jw4FHC04HHvXSwKs3U8+73cShwcMD3QUHew0reDczfUmMBdYoOBVYw0sCe0O/olLwZhMvccE63jxgpYKb4EifO7S8ZfAxHljLe31qRQWrFUwAr97Y96h5K++laGC9gpOA9bybU+scHOaDlmLBFfAaC6zpzQBWLbgPZq7u8SxKYFVv+b0kBT9u8ne0ghXBPx/LGTXrehtg3getGneYrFxw46MWC/zYzgBZ2asD/vnYTZSCVcAEr5is7b1+L23Aq5ZXNtfqBTc+W1LBRK5MrO8dBtO9grE2KHgUTJ1nmdjAWweTPkozvcyxtii4/mGaAmZ7eWIL7/V7iQfmezlik4J7YHUvQ2zirX+Y7oMFA80R2xQ8AhZ6qWIb7wBYWjBRbFSwHDzgJYmNvHLwiJcgtiq4Cu79YWmoYILYylv982EPPOjtic0Krv75sAMeLfix87naztsGr2YFt8WGBdf+9NAGKxTcFBt6ZWAVb30bWxbsCa6KLb0isM5EV4fatGARWMtbEZt6JWC1gstDbVtwDXycAy6Jbb21n/G0wIrewlAbFywAaxZcEBt7/cFXQ21dcBtsP9EbsbW39s8t62Dlgq+G2rzgCODzis29fLC691xs7w0B/h7qHwHB+hN9VvEEbwzw47yCg4AfpxXMBtt4P4Z6SsFRwI+zCuaCjSb6veI5BYcBP/49xxsH/K+YYDvvy79vC/xyOt0U+Omf02lOxTzwT8OCJ1UcA/xe8KSKY4A/Cp4jDgH+LHjOUEcAP30VPKViHth0oOdUHAD8PdBTKg4APivYvuK//MHnBdtXHAB8UbB5xf7gl38uwcYVu4OfrrzWFfPAP80H2rxib/C2YOOKncFP24KNK3YGl7y2FfuCSwNtXPE16XgBXo3B5YJNK3YFv/xTARtW7Al+qnktK/YEv1S9hhWXwbV/iacKbhRsWDEPrPnR8qlRsF3Ff/mBm16ziv3AzYG2q7gDPpqBnzoFW1V8DV5mgbvenYGrHzmsZ5oL/jlroK0qviuC17s72z89ULw2FfuACQNtVPFDD7xagHtvJMOK38pvpTr47j8KXtJA21T8Xzb4pDDQVK9+xQ8eYOIGtgE/18GVz5an0ZmmbmCTmX6rgC/eyLpg+ga2qPi1fEi3wIfBmWZ51SsWgYcqZmxgg4ofROCRilkbWL/ih1MDXPvrtBEwbwPrg7dn1vnRXHsvyWda4NWd6dfGW6kBFlcs8KpW/CAFCyvmHlif+Z8i+NQEVz55HKQVy7ynVz3w2+bMKvyX6aVjWlQx/4BW38WvzUO6BRZULDmwlMEPMvD7JuZXLPfqHVuFLXxprJ9a7IpHvGoVv7XPrDaYV/GQV63iVyH4wK540KtUcWELc8CMike9ShU/nHrg1jHNqHjcqwN+O7UP6fYxTRcreHVm+rV3SPfAtKHW8KpU/NAHN49povhFxatR8a8t3DmkO6cWaaiFn58tKn7rnll9cE/8pOYdr/jXRFPB1U3cEyuNs07FpYlersFLF3yaUq9GxW+n/plFAVdPLtV6FSp+ZYAbm7hW8otuveMVN7bwcfM7HfC2ZAPuKPjXRPfPrPr/E7dZzcXeteCeBmf6lXJmUY7p87x8xkQ7WPEDEUw5tf7EpliVit8nun9mUU+tWRmo+FfBlDOLemrNytBEU84sxqkVu+LiRDfA1E0cteKPgilnVv3UOqQSP7x/610FTHgKjmDZUL8VweXpjbWJZRWXJ7pCC7aJRRV/FEzbwnXwIVHF7wVXt/BK+20/ML/ihzK4UuUSbRPzKy5PdHV2w4G5FX8WTD2zAm5irvijYPIWjgjmDfVnwQxwvE3Mq/izYPoWjgjmVPxVMAMccaYZ4s+CGRMdE0we6q+CWeCIM00WfxXMmeg62LNi4lBXC26BQ840seKvglkT/Q2ONdMk8dtXwc90U9hNTBH/HmjeFv4GB5tpwjb+PdAnOqnzOHzBPfHvgS4U3NzCUTdxT/w90NwtHPXF1BE/fA8086UUeBM3xX+87C0cdxM3xN8bWLCFGyN/8PbWxGfeE8OTYKaL7+OHc69gokPP9Glb8tl5dRJNdOyZPl2V/PB24ZVMdPCZ/kiNK5voxtd4Q8/z9p7r33wWgaPPdCOiiW7tc29QJ89V8B0FHHymSWDSROedaeFEt77Mm9TMsxhcH4SDN6oVDmQXMy0uOOlMyyc66UwPTHTKikcK/v7STBXXC6aAE8700EQnnOmxiU4402MT3fxqb1ox9YJpE92ah4M3rhSWgDnTESsuFMyb6ObXH7x52/Aay1+xQsFN8MEbeB3ehO5gpjUmOtNMq0x0pop1Cv4Gh6/4mbd20UwfvJHn4U2nbKYjVVwoWDTRaSpWKzhJxYoFt7e+N7ThlR1Z50+qVPHBm/oZ7rLlMx2j4lLB4onufOvBG/sedk3JK9YuuL39D97cdsEicHv/e3PbBa93ksSuWL/gzvNyFvMXPFqx71A/WxQcuWKTggNXbFTwn0uUn1ks73fBA+DONQ5eYEk7mSu2K7h7lUBelYK7lzl4gEXVJK7YtOD+hYJ41QruXukwGyzrRbHiyWJZLZoVzx3qZ/OCCRfz96oW3L/aYR5Y2olyxdPE0kq0K5411M9zCqZc0NWrXjDlip5e9YJJl/TzGhRMuebBGjzShknFxuKRMmwqthUPdTFUsY94bGFjFTcepJl4cF1mFVuJR5clC+lRmoiHVyUL7VkaiMcXJQzxYSpznzXWJMviISZ6LQqmX36al1qBufig5W3fxtzLuMOEes0H+vIWE8Q9r33B5/foPtThsVZcy0COjLuY1suZtpEsnNsMlKz76EdyZD1YIVl9HfPEEjJlFaxJG8vCnSUm2WYRIzmyb8Yg89ewmoMXvph4Yj/bPfOhHGX309JeLmCdAJbfsDrbrNsvs72XQ82/pbTY0t2neK+Gmi8eyuDTVrjpXPHlrafd9ugldnvUXmK30Vp8xJd3nei9vvUksdtOuttUPOXuR8eCN3ef/CF+/utwU7G1eJn+gK9znCreeNfp4G3Fc3566FVwqeIJPxD3K7hYsfnf8XgWXFyH7V9b+hZcqdjwnx54F1wBK69msb8FPRWwZsnmN2ClVrFaA1NmSAWs04H181Rckcai6o9T5Wmqg0fJjQv7gZe2eGBhhk/SECwmd67rB77rgUWr6z1G4VOcBeaS+9cLD5b8j5rJwcRVqj8+/fS2G322GVdy9DLBtXqYV8kFVgjAAAOcGrzeGvjmGgYYYIABBhjgSjy8SX4AAHBK8OICjvxzaYABzgX28Yb928P9gRcncMR/AbBPsJfXbaYB3jl4cQMH+5d4uwX7eZ1m+tbAiyPYZaZvDuzpdZnpWwMvrmCHmb45sK/XYaYB3jl4cQZP38Q3B/b2Tp9pb6/r/x/iE4BN4609zp5pb+1s8OKtfQ/AhvG2fmQF2CyLt/UzAJvFW/qVFWCjLN7S3wEYYJ14O7+zAmySxdv5JwCbxFt5lhVggyzeyvMAbBBv40VWgNWzeBsvA7B6vIVXWQFWzuItvA7AyvH2bbICrJrF27cNwKrx1hWyAgywPIu3rhSAFeNtK2YFWC2Lt60cgNXiLatkBVgpi7esFoCV4u2qZgVYJYu3qx6A9z3RVjPtrZoNXrxVrQC874m2mWlv02zw4m1qB+B9T7TFTHuLZoMXb1EvAAPMi7enmxXgfU+09kzfHNhbQ4juTHtrADYGL94aSgAGmB5vCykrwABTs3hbaAEYYIAr8ZYQswIMMMAAv2fxllADMMAAAwxw5AAMMMAAAxw5AEvjDSFmBRhggFOD1bxZjmmAdz7TK8AAk7N4YyhR9KaoWLPgGwQv3px+VL23B44/07oTnaBiZW/4irULDl+xujd4xfoFB6/YwBu6YouCQ1ds4g0sNvKGHWqbgY4rNvTGHGpDb0ixqTeg2NgbTmzuvQt1cq0zvIFKnsMNU/KkesOUPJMbgDyb60z24PqRVy+uj9lV+5mbKfcsU3r2Rl7nNqqdgY6K/Z1lz2Ncz+571XMnlbLls5z/BwPxdwyhWA63AAAAAElFTkSuQmCC"></image>
+</svg> </div>
+<h4>Scotch</h4>
+</div>
+<p class="p-r-lg m-b-xs">Top shelf learning. Dev tutorials explaining the code <strong style="color: #DDD">and the choices behind it all.</strong></p>
+<p>Made with 💖 by <a href="https://twitter.com/chrisoncode" class="has-text-light">Chris</a> and <a href="https://twitter.com/whatnicktweets" class="has-text-light">Nick</a>.</p>
+<ul class="footer-social-links list-unstyled">
+<li><a href="https://twitter.com/scotch_io" class="icon-twitter" title="Follow Scotch on Twitter">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 410.155 410.155" style="enable-background:new 0 0 410.155 410.155;" xml:space="preserve" width="50" height="50">
+<path style="fill:#23A0F2;" d="M403.632,74.18c-9.113,4.041-18.573,7.229-28.28,9.537c10.696-10.164,18.738-22.877,23.275-37.067
+	l0,0c1.295-4.051-3.105-7.554-6.763-5.385l0,0c-13.504,8.01-28.05,14.019-43.235,17.862c-0.881,0.223-1.79,0.336-2.702,0.336
+	c-2.766,0-5.455-1.027-7.57-2.891c-16.156-14.239-36.935-22.081-58.508-22.081c-9.335,0-18.76,1.455-28.014,4.325
+	c-28.672,8.893-50.795,32.544-57.736,61.724c-2.604,10.945-3.309,21.9-2.097,32.56c0.139,1.225-0.44,2.08-0.797,2.481
+	c-0.627,0.703-1.516,1.106-2.439,1.106c-0.103,0-0.209-0.005-0.314-0.015c-62.762-5.831-119.358-36.068-159.363-85.14l0,0
+	c-2.04-2.503-5.952-2.196-7.578,0.593l0,0C13.677,65.565,9.537,80.937,9.537,96.579c0,23.972,9.631,46.563,26.36,63.032
+	c-7.035-1.668-13.844-4.295-20.169-7.808l0,0c-3.06-1.7-6.825,0.485-6.868,3.985l0,0c-0.438,35.612,20.412,67.3,51.646,81.569
+	c-0.629,0.015-1.258,0.022-1.888,0.022c-4.951,0-9.964-0.478-14.898-1.421l0,0c-3.446-0.658-6.341,2.611-5.271,5.952l0,0
+	c10.138,31.651,37.39,54.981,70.002,60.278c-27.066,18.169-58.585,27.753-91.39,27.753l-10.227-0.006
+	c-3.151,0-5.816,2.054-6.619,5.106c-0.791,3.006,0.666,6.177,3.353,7.74c36.966,21.513,79.131,32.883,121.955,32.883
+	c37.485,0,72.549-7.439,104.219-22.109c29.033-13.449,54.689-32.674,76.255-57.141c20.09-22.792,35.8-49.103,46.692-78.201
+	c10.383-27.737,15.871-57.333,15.871-85.589v-1.346c-0.001-4.537,2.051-8.806,5.631-11.712c13.585-11.03,25.415-24.014,35.16-38.591
+	l0,0C411.924,77.126,407.866,72.302,403.632,74.18L403.632,74.18z"></path>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+</a></li>
+<li><a href="https://facebook.com/scotchdevelopment" class="icon-facebook" title="Follow Scotch on Facebook">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="50" height="50" viewBox="0 0 96.124 96.123" style="enable-background:new 0 0 96.124 96.123;" xml:space="preserve">
+<g>
+<path d="M72.089,0.02L59.624,0C45.62,0,36.57,9.285,36.57,23.656v10.907H24.037c-1.083,0-1.96,0.878-1.96,1.961v15.803   c0,1.083,0.878,1.96,1.96,1.96h12.533v39.876c0,1.083,0.877,1.96,1.96,1.96h16.352c1.083,0,1.96-0.878,1.96-1.96V54.287h14.654   c1.083,0,1.96-0.877,1.96-1.96l0.006-15.803c0-0.52-0.207-1.018-0.574-1.386c-0.367-0.368-0.867-0.575-1.387-0.575H56.842v-9.246   c0-4.444,1.059-6.7,6.848-6.7l8.397-0.003c1.082,0,1.959-0.878,1.959-1.96V1.98C74.046,0.899,73.17,0.022,72.089,0.02z" fill="#FFFFFF"></path>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+</a></li>
+<li><a href="https://github.com/scotch-io" class="icon-github" title="Follow Scotch on GitHub">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="50" height="50" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<g>
+<path d="M256,0C114.615,0,0,114.615,0,256s114.615,256,256,256s256-114.615,256-256S397.385,0,256,0z M408.027,408.027   c-19.76,19.759-42.756,35.267-68.354,46.094c-6.502,2.75-13.105,5.164-19.801,7.246V423c0-20.167-6.916-35-20.75-44.5   c8.668-0.833,16.625-2,23.875-3.5s14.918-3.667,23-6.5c8.084-2.833,15.334-6.208,21.75-10.125c6.418-3.917,12.584-9,18.5-15.25   c5.918-6.25,10.875-13.333,14.875-21.25s7.168-17.417,9.5-28.5c2.334-11.083,3.5-23.292,3.5-36.625c0-25.833-8.416-47.833-25.25-66   c7.668-20,6.834-41.75-2.5-65.25l-6.25-0.75c-4.332-0.5-12.125,1.333-23.375,5.5s-23.875,11-37.875,20.5   c-19.832-5.5-40.416-8.25-61.749-8.25c-21.5,0-42,2.75-61.5,8.25c-8.833-6-17.208-10.958-25.125-14.875s-14.25-6.583-19-8   s-9.167-2.292-13.25-2.625s-6.708-0.417-7.875-0.25s-2,0.333-2.5,0.5c-9.333,23.667-10.167,45.417-2.5,65.25   c-16.833,18.167-25.25,40.167-25.25,66c0,13.333,1.167,25.542,3.5,36.625s5.5,20.583,9.5,28.5s8.958,15,14.875,21.25   s12.083,11.333,18.5,15.25s13.667,7.292,21.75,10.125s15.75,5,23,6.5s15.208,2.667,23.875,3.5c-13.667,9.333-20.5,24.167-20.5,44.5   v39.115c-7.549-2.247-14.99-4.902-22.3-7.994c-25.597-10.827-48.594-26.335-68.353-46.094   c-19.758-19.758-35.267-42.756-46.093-68.354C46.679,313.195,41,285.043,41,256s5.679-57.195,16.879-83.675   c10.827-25.597,26.335-48.594,46.093-68.353c19.758-19.759,42.756-35.267,68.353-46.093C198.805,46.679,226.957,41,256,41   s57.195,5.679,83.676,16.879c25.598,10.827,48.594,26.335,68.354,46.093c19.758,19.758,35.266,42.756,46.092,68.353   C465.32,198.805,471,226.957,471,256s-5.68,57.195-16.879,83.675C443.295,365.271,427.785,388.27,408.027,408.027z" fill="#FFFFFF"></path>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+</a></li>
+</ul>
+</div>
+</div>
+<div class="column is-4">
+<div class="is-hidden-with-account">
+<style>
+.ml-subscribe-form-1112100 {
+    color: #eee;
+    text-align: center;
+    margin: 0 auto 20px;
+    max-width: 90%;
+}
+
+.ml-subscribe-form-1112100 h4 {
+    font-size: 22px;
+    color: #eee;
+    margin-bottom: 20px;
+}
+
+@media  screen and (max-width: 768px) {
+    .ml-subscribe-form-1112100 h4 {
+        font-size: 16px;
+    }
+}
+</style>
+<div id="mlb2-1112100" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-1112100">
+<div class="ml-form-align-center ">
+<div class="ml-form-embedWrapper embedForm">
+<div class="ml-form-embedBody ml-form-embedBodyHorizontal row-form">
+<h4>We can't send Scotch drinks...<br>but we can send cool dev articles</h4>
+<form class="ml-block-form" action="https://app.mailerlite.com/webforms/submit/w3o9h2" data-code="w3o9h2" method="post" target="_blank">
+<style type="text/css">
+              .ml_message_wrapper {
+                position: absolute !important;
+                left: -9999px !important;
+              }
+            </style>
+<div aria-label="Please leave the following field empty" class="ml_message_wrapper">
+<input type="text" name="ml_message" tabindex="-1" value="" placeholder="Message" autocomplete="off" title="message">
+<input type="text" name="ml_email" tabindex="-1" value="" placeholder="Email" autocomplete="off" title="email">
+<input type="text" name="ml_name" tabindex="-1" value="" placeholder="Name" autocomplete="off" title="name">
+</div>
+<div class="field has-addons">
+<div class="control is-expanded has-icons-left ml-field-group ml-field-email ml-validate-email ml-validate-required">
+<input type="email" class="form-control input is-medium" data-inputmask="" name="fields[email]" value="" placeholder="Email" aria-label="Your Email">
+<div class="icon is-small is-left">
+📧
+</div>
+</div>
+<div class="control">
+<button type="submit" class="primary button is-warning is-outlined is-medium">Subscribe</button>
+<button disabled="" style="display: none;" type="button" class="button is-warning is-outlined is-medium is-loading loading">
+🌟 Magic ✨
+</button>
+</div>
+</div>
+<style type="text/css">
+              .ml-form-recaptcha {
+                margin-bottom: 20px;
+              }
+
+              .ml-form-recaptcha.ml-error iframe {
+                border: solid 1px #ff0000;
+              }
+            </style>
+ <input type="hidden" name="ml-submit" value="1">
+</form>
+</div>
+<div class="ml-form-successBody row-success" style="display: none">
+<div class="ml-form-successContent">
+<h4>Thank you!</h4>
+<p>You have successfully joined the Scotchy super duper web dev awesome mailing list.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+    function ml_webform_success_1112100() {
+        document.querySelector('.ml-subscribe-form-1112100 .row-success').style.display = 'block';
+        document.querySelector('.ml-subscribe-form-1112100 .row-form').style.display = 'none';
+        // var $ = ml_jQuery || jQuery;
+        // $('.ml-subscribe-form-1112100 .row-success').show();
+        // $('.ml-subscribe-form-1112100 .row-form').hide();
+      }
+  </script>
+<img class="lazy" data-src="https://track.mailerlite.com/webforms/o/1112100/w3o9h2?vaa4d608450783acdc64d5338ff94f6d5" width="1" height="1" style="max-width: 1px; max-height: 1px; visibility: hidden; padding: 0; margin: 0; display: block;" border="0">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="footer__bottom footer--dark p-b-sm">
+<div class="container">
+<div class="footer__copyright columns">
+<div class="column has-text-left is-hidden-touch partners">
+<nav>
+<ul class="list-unstyled powered-by is-hidden-mobile" style="justify-content: flex-start">
+<li><a href="https://cloudinary.com/?utm_source=scotch&amp;utm_campaign=coolstuff">
+Images hosted and processed by<br>
+<img class="lazy" data-src="/img/logos/cloudinary.png" alt="Cloudinary">
+</a></li>
+<li><a href="https://algolia.com/?utm_source=scotch&amp;utm_campaign=coolstuff">
+Real-time search by<br>
+<img class="lazy" data-src="/img/logos/algolia.png" alt="Algolia" style="padding-top: 5px">
+</a></li>
+<li><a href="https://m.do.co/c/7a59e9361ab7">
+Hosted by<br>
+<img class="lazy" data-src="/img/logos/digital-ocean.png" alt="Digital Ocean" style="padding-top: 4px">
+</a></li>
+</ul>
+</nav>
+</div>
+<div class="column has-text-right">
+<nav style="height: 100%">
+<ul class="list-unstyled" style="align-items: center; justify-content: flex-end; height: 100%">
+<li><a href="https://discover.buysellads.com/tech/scotchio">Advertise</a></li>
+<li><a href="https://scotch.io/privacy">Privacy</a></li>
+<li><a href="https://scotch.io/terms">Terms</a></li>
+<li><a href="https://scotch.io/rules">Rules</a></li>
+<li><a href="https://scotch.io/contact">Contact</a></li>
+<li>1853-2019 © Scotch.io, LLC</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script src="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/scotch-S2S-v20181004.js" data-cfasync="false" defer=""></script>
+<script>
+    if (window.bsa_targeting !== undefined) {
+        window.bsa_targeting.push(['scotchio_section', ['single-post']]);
+        window.bsa_targeting.push(['scotchio_postid', ['2486']]);
+    }
+</script>
+<script>
+    if (window.bsa_targeting !== undefined) {
+                    window.bsa_targeting.push(['scotchio_tags', ["python","crud","flask"]]);
+            }
+</script>
+<script src="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/polyfill.min.js" defer=""></script>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-36045075-1', 'auto');
+ga('set', 'transport', 'beacon');
+ga('send', 'pageview');
+</script>
+<script src="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/manifest.js" defer=""></script>
+<script src="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/vendor.js" defer=""></script>
+<script>
+    // used to lazyload spot im in lazyload-comments.js
+    window.scotchy = window.scotchy || {};
+    window.scotchy.articleId =  "2486";
+    window.scotchy.articleUrl = "https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three";
+    </script>
+<script src="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/app.js" defer=""></script>
+<script>
+    const twitchBanner = document.getElementById('twitch-banner');
+
+    fetch('/api/twitch/check')
+        .then(resp => resp.json())
+        .then(data => {
+            if (data.is_streaming)
+                twitchBanner.style.display = 'block';
+        });
+</script>
+<script>
+        window.addEventListener('load', function(event) {
+            // dont open search on mobile
+            if (window.innerWidth > 1024) {
+                setTimeout(function() {
+                    var searchScripp = document.createElement('script');
+                    searchScripp.type = 'text/javascript';
+                    searchScripp.src = "/js/app-search.js?id=75d73da5e854411a3e09";
+                    searchScripp.defer = true;
+                    document.body.appendChild(searchScripp);
+                }, 5000);
+            }
+        });
+    </script>
+<script>
+                    // published at
+            if (window.ga !== undefined)
+                window.ga('set', 'dimension4', 'January 11, 2017');
+        
+                    // main tag
+            if (window.ga !== undefined)
+                window.ga('set', 'dimension5', 'python');
+        
+        // author
+        if (window.ga !== undefined) {
+            window.ga('set', 'contentGroup1', "Mbithe Nzomo")
+            window.ga('set', 'dimension1', "Mbithe Nzomo")
+        }
+    </script>
+<script>
+const authorFollowTwitter = document.getElementById('author-follow-twitter');
+authorFollowTwitter.addEventListener('click', function(e) {
+    e.preventDefault();
+    const url = this.href;
+    const twitterUsername = authorFollowTwitter.dataset.twitterUsername;
+
+    if (window.ga) {
+        window.ga(
+            'send',
+            'event',
+            'Follows',
+            'Twitter',
+            twitterUsername,
+            { 'transport': 'beacon', 'hitCallback': function() { document.location = url; }}
+        );
+    } else {
+        document.location = url;
+    }
+});
+</script>
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "@id": "https://scotch.io#organization",
+    "name": "Scotch.io",
+    "url": "https://scotch.io",
+    "sameAs": [
+        "http://www.facebook.com/scotchdevelopment",
+        "http://twitter.com/scotch_io",
+        "http://instagram.com/scotch_io",
+        "http://www.linkedin.com/in/scotch_io",
+        "http://plus.google.com/scotch_io"
+    ],
+    "legalName": "Scotch.io, LLC",
+    "logo": {
+        "@type": "ImageObject",
+        "url": "https://scotch.io/img/school-logo-sticker.png",
+        "width": 37,
+        "height": 60
+    },
+    "founder": {
+        "@type": "Person",
+        "name": "Chris Sevilleja",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://scotch-res.cloudinary.com/image/upload/w_300,q_auto:good,f_auto,c_fill,g_face/media/1/w7Vhk81SyClJPlDQPMLh_17795826_10154678250924582_8102840950354615336_n.jpg",
+            "width": 300,
+            "height": 300
+        }
+    }
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "@id": "https://scotch.io#website",
+    "url": "https://scotch.io",
+    "name": "Scotch",
+    "alternateName": "Scotch.io",
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://scotch.io/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    "author": {
+        "@id": "https://scotch.io#organization"
+    }
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three",
+    "url": "https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three",
+
+        "headline": "Build a CRUD Web App With Python and Flask - Part Three",
+    
+    "description": "Create custom error pages, write tests, and deploy your app to PythonAnywhere",
+
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://scotch.io/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+
+    "publisher": {
+        "@id": "https://scotch.io#organization"
+    },
+
+    
+        "dateCreated": "2016-12-17 11:11:35",
+    
+        "datePublished": "2017-01-11 09:36:18",
+    
+    
+        "dateModified": "2019-02-06 07:09:56",
+    
+        "commentCount": 52,
+    
+    "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                    "@id": "https://scotch.io",
+                    "name": "Home"
+                }
+            },
+
+                            {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "@id": "https://scotch.io/tutorials",
+                        "name": "Tutorials"
+                    }
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "item": {
+                        "@id": "https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three",
+                        "name": "Build a CRUD Web App With Python and Flask - Part Three"
+                    }
+                }
+                    ]
+    },
+    
+    "sourceOrganization": {
+        "@id": "https://scotch.io#organization"
+    }
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "TechArticle",
+    "@id": "https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three#article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three"
+    },
+    "url": "https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three",
+    "headline": "Build a CRUD Web App With Python and Flask - Part Three",
+    "wordCount": 2864,
+    "description": "Create custom error pages, write tests, and deploy your app to PythonAnywhere",
+    "audience": "web developers and designers",
+    "discussionUrl": "https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-three#comments",
+
+        "proficiencyLevel": "Beginner",
+    
+        "image": {
+        "@type": "ImageObject",
+        "url": "https://scotch-res.cloudinary.com/image/upload/w_1500,q_auto:good,f_auto/media/8943/qsbMCqBWSAewPczaDvsP_dream-team-3.jpg",
+        "height": 750,
+        "width": 1500
+    },
+    
+        "keywords": "python, crud, flask",
+    
+        "dateCreated": "2016-12-17 11:11:35",
+    
+        "datePublished": "2017-01-11 09:36:18",
+    
+    
+        "dateModified": "2019-02-06 07:09:56",
+    
+        "articleSection": "Tutorials",
+    
+        "commentCount": 52,
+    
+        "author": {
+        "@type": "Person",
+        "name": "Mbithe Nzomo",
+
+                "image": {
+            "@type": "ImageObject",
+            "url": "https://scotch-res.cloudinary.com/image/upload/w_300,h_300,q_auto:good,f_auto,c_fill,g_face/media/8943/DIpEAHkMScuUwZL9s5Q1_mbithe.jpg",
+            "height": 300,
+            "width": 300
+        },
+        
+        "url": "https://scotch.io/@mbithenzomo"
+    },
+    
+    "publisher": {
+        "@id": "https://scotch.io#organization"
+    }
+}
+</script>
+
+
+<script type="text/x-spotim-options">SPOTIM_OPTIONS = {"prerenderDeferred":true}</script><script async="" src="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/lazyload.min.js"></script><script type="text/javascript" src="./Build a CRUD Web App With Python and Flask - Part Three ― Scotch.io_files/app-search.js" defer=""></script></body></html>

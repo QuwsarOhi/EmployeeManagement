@@ -1,0 +1,292 @@
+body,
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body,
+h1,
+h2,
+h3 {
+    font-family: 'Quicksand', sans-serif;
+}
+
+a,
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav>li>a {
+    color: #7d7d7d;
+    border-bottom: 1px solid transparent;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-nav>li>a:hover {
+    color: #007ee5;
+    border-bottom: 1px solid #007ee5;
+}
+
+a:hover {
+    color: #007ee5;
+}
+
+footer {
+    padding: 20px 0;
+    padding-top: 10px;
+    background-color: #f8f8f8;
+}
+
+p.copyright {
+    margin: 15px 0 0;
+}
+
+.alert-info {
+    width: 50%;
+    margin: auto;
+    color: #007ee5;
+    border-color: #007ee5;
+}
+
+.btn-default {
+    border-color: #007ee5;
+    color: #007ee5;
+}
+
+.btn-default:hover {
+    background-color: #007ee5;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.content-section {
+    padding: 50px 0;
+    border-top: 1px solid #e7e7e7;
+}
+
+.footer,
+.push {
+    clear: both;
+    height: 4em;
+}
+
+.intro-divider {
+    width: 400px;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.intro-header {
+    padding-bottom: 8%;
+    text-align: center;
+    color: #f8f8f8;
+    background: url(../img/intro-bg.png) no-repeat center center;
+    background-size: cover;
+    height: 100%;
+}
+
+.intro-message {
+    position: relative;
+    padding-top: 10%;
+    padding-bottom: 20%;
+    text-align: center;
+    margin-right: -66%;
+}
+
+.intro-message>h1 {
+    margin: 0;
+    font-size: 5em;
+    color: #007ee5;
+}
+
+.intro-message>h3 {
+    color: #343434;
+}
+
+.lead {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.topnav {
+    font-size: 14px;
+    width: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -4em;
+}
+
+.outer {
+    display: table;
+    position: absolute;
+    height: 70%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a {
+    cursor: pointer;
+}
+
+.bluecolor {
+    color: #F44336;
+}
+
+.btn:hover {
+    color: white;
+    border: none;
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.navbar-right {
+    margin-right: 5px;
+}
+
+.homelogo {
+    margin-left: 20px;
+    width: auto;
+    font-size: 16px;
+}
+
+.homelogo:hover {
+    color: #007ee5;
+}
+
+#out {
+    width: 200px;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 30px;
+    background-color: white;
+    color: #007ee5;
+    border: 1px solid #007ee5;
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+#out:hover {
+    text-decoration: none;
+    background-color: #007ee5;
+    color: white;
+}
+
+#message {
+    position: absolute;
+    z-index: 999;
+    width: 450px;
+    top: 55%;
+    left: 60%;
+    color: lightgrey;
+    text-align: center;
+    margin: 0;
+}
+
+#in {
+    width: 200px;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 30px;
+    background-color: white;
+    color: #26A69A;
+    border: 1px solid #26A69A;
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+#in:hover {
+    text-decoration: none;
+    background-color: #26A69A;
+    color: white;
+}
+
+.btn-default {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+    border: 1px solid #007ee5;
+    box-sizing: border-box;
+}
+
+.btn-default:hover {
+    text-decoration: none;
+    background-color: #007ee5;
+    color: white;
+    border: 1px solid #007ee5;
+}
+
+#db {
+    width: 200px;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 30px;
+    background-color: white;
+    color: #03A9F4;
+    border: 1px solid #03A9F4;
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+#db:hover {
+    text-decoration: none;
+    background-color: #03A9F4;
+    color: white;
+}
+
+#profilebtn {
+    width: 200px;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 30px;
+    background-color: white;
+    color: #26A69A;
+    border: 1px solid #26A69A;
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+#profilebtn:hover {
+    text-decoration: none;
+    background-color: #26A69A;
+    color: white;
+}
+
+.red:hover {
+    color: #F44336;
+}
+
+.green:hover {
+    color: #4CAF50;
+}
+
+.blue:hover {
+    color: #03A9F4;
+}

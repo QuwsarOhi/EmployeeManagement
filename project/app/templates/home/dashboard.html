@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block title %}Dashboard{% endblock %} {% block body %}
+<div class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">
+                    <h1>Hello {{current_user.first_name}}</h1>
+                    <h3>Welcome to EMS. Let's Get Started</h3>
+                    </ul>
+                    <br>
+                    <br>
+                    <a href="{{ url_for('home.profile') }}" id="profilebtn">View your profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

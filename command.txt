@@ -1,0 +1,81 @@
+## following :: https://scotch.io/tutorials/build-a-crud-web-app-with-python-and-flask-part-one
+
+#First install python2.7 and pip
+
+
+#install virtualenv
+
+sudo apt install virtualenv
+sudo apt-get install python-virtualenv
+
+
+#create virtualenv (venv)
+
+virtualenv venv
+
+
+#active/deactive virtualenv
+[linux]
+. venv/bin/activate
+. venv/bin/deactivate
+
+[windows] 
+venv\Scripts\activate
+
+#install mysql and python-dev
+sudo apt install mysql
+sudo apt install python-dev
+sudo apt-get install libmysqlclient-dev
+[follow mysql setup instructions from digitalocean]
+
+#install flask
+
+pip install flask
+
+
+#install flask-SQLAlchemy
+
+pip install flask-sqlalchemy
+
+
+#install mysql-python
+
+pip install mysql-python
+
+
+#loging and configuring mysql database
+
+sudo mysql -u root
+SET GLOBAL validate_password_length = 6; [setting global password len to 6]
+SET GLOBAL validate_password_number_count = 0; [setting password validation to 0]
+
+# creating mysql database
+
+CREATE USER 'dt_admin'@'localhost' IDENTIFIED BY 'dt2016'; [database user dt_admin created at localhost server with password dt2016]
+
+CREATE DATABASE dreamteam_db; [table dreamteam_db created for user dt_admin]
+
+GRANT ALL PRIVILEGES ON dreamteam_db . * TO 'dt_admin'@'localhost'; [granting all access privilages to dt_admin]
+
+# database migration
+flask db init
+flask db migrate
+flask db upgrade
+
+
+
+## Startup Commands:
+
+export FLASK_CONFIG=development
+export FLASK_APP=run.py
+flask run
+
+
+## Flask Shell Database:
+
+$ flask shell
+>>> from app.models import Employee
+>>> from app import db
+>>> admin = Employee(email="admin@admin.com",username="admin",password="admin2016",is_admin=True)
+>>> db.session.add(admin)
+>>> db.session.commit()

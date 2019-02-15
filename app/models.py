@@ -25,6 +25,7 @@ class Employee(UserMixin, db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     is_admin = db.Column(db.Boolean, default=False)
 
+
     @property
     def password(self):
         """

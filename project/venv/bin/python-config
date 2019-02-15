@@ -1,4 +1,4 @@
-#!/mnt/Work/squadmaster/venv/bin/python
+#!/mnt/Work/EmployeeManagement/project/venv/bin/python
 
 import sys
 import getopt

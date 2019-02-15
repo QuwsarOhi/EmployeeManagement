@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-    flaskext.sqlalchemy._compat
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    flask_sqlalchemy._compat
+    ~~~~~~~~~~~~~~~~~~~~~~~~
 
     Internal Python 2.x/3.x compatibility layer.
 
@@ -9,7 +9,6 @@
     :license: BSD, see LICENSE for more details.
 """
 import sys
-
 
 PY2 = sys.version_info[0] == 2
 
@@ -25,6 +24,15 @@ if PY2:
 
     string_types = (unicode, bytes)
 
+    def to_str(x, charset='utf8', errors='strict'):
+        if x is None or isinstance(x, str):
+            return x
+
+        if isinstance(x, unicode):
+            return x.encode(charset, errors)
+
+        return str(x)
+
 else:
     def iteritems(d):
         return iter(d.items())
@@ -34,4 +42,13 @@ else:
 
     xrange = range
 
-    string_types = (str, )
+    string_types = (str,)
+
+    def to_str(x, charset='utf8', errors='strict'):
+        if x is None or isinstance(x, str):
+            return x
+
+        if isinstance(x, bytes):
+            return x.decode(charset, errors)
+
+        return str(x)

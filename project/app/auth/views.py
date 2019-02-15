@@ -33,7 +33,7 @@ def register():
     return render_template('auth/register.html', form=form, title='Register')
 
 
-@auth.route('/login', methods=['GET', 'POST'])
+@auth.route('/user_login', methods=['GET', 'POST'])
 def login():
     """
     Handle requests to the /login route
